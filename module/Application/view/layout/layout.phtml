@@ -1,0 +1,56 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Tabouret Corp')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('css/style.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ?>
+    </head>
+    <body>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <header>
+            <div id="header" class="row justify-content-between">
+                <div class="logo col-lg-3 col-md-3 col-sm-3 col-4">
+                    <a href="<?= $this->basePath()?>/page/1" ><img src="http://jhaegman.com/tabourets_corp.png"/></a>
+                </div>
+                <div class="logo col-lg-3 col-md-3 col-sm-3 col-1 voir_plus">
+                    <a href="<?= $this->basePath()?>/administration"><h3 class="hidden">Administration du site</h3></a>
+                </div>
+                <div>
+                    <!-- Navigation bar -->
+                    <?php
+                    // Render the navbar
+                    echo $this->mainMenu()->render();
+                    ?>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <?= $this->content ?>
+            <hr>
+            <footer>
+                <p>&copy; 2018 by Tabourets Corp. All rights reserved.</p>
+            </footer>
+        </div>
+        <?= $this->inlineScript() ?>
+    </body>
+</html>

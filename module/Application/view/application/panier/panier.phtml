@@ -1,0 +1,55 @@
+<header>
+</header>
+
+<main>
+    <h3>Panier</h3></br>
+
+    <?php
+        $index=0;
+        $sousTotal=0;
+
+        //Si il y a des produits dans le panier
+        if($indexMax>0){
+            //Affiche chaque produit
+            foreach ($paniers as $panier) :
+
+
+                //Infos produits
+                echo '<div class="produitPanier row">';
+                echo '<div class="col-lg-2 col-md-2 col-sm-2 col-2">';
+                echo '<a href="./produits/'.$this->escapeHtml($produits[$index]->_id).'"><img class="imageListe" src="http://jhaegman.com/stool.svg"></a>';
+                echo '</div>';
+                echo '<div class="col-lg-3 offset-lg-1 col-md-4 offset-md-2 col-sm-4 offset-sm-2 col-4 offset-3">';
+                echo '<a href="./produits/'.$this->escapeHtml($produits[$index]->_id).'">'.$this->escapeHtml($produits[$index]->_name).'</a>';
+                echo '<p class="produitDescParagraphe">'.$this->escapeHtml($produits[$index]->_description).'</p>';
+                echo '</div>';
+                echo '<div class="col-lg-2 offset-lg-4 col-md-2 offset-md-1 col-sm-2 offset-sm-1 col-3">';
+                echo '<span class="produitDescPrix">'.$this->escapeHtml($produits[$index]->_price).'$CAN x '.$this->escapeHtml($panier->_quantity).'</span><br></div>';
+
+                //Suppression
+                echo '<div class="col-lg-2 offset-lg-4 col-md-2 offset-md-1 col-sm-2 offset-sm-1 col-3">';
+                echo '<a href="'.$this->basePath().'/panier/suppression/'.$this->escapeHtml($produits[$index]->_id).'" style="font-size:0.8em;color:darkred;line-height:3em">Supprimer</a><br></div>';
+                echo '<br><br></div><hr>';
+
+                //Ajout à la valeur du subtotal
+                $sousTotal+=$this->escapeHtml($produits[$index]->_price)*$panier->_quantity;
+                $index++;
+            endforeach;
+
+            //Affichage du prix
+            echo '<span class="produitDescPrixBlack" >Sous total hors taxes : </span><span class="produitDescPrix">'.$sousTotal.'$CAN</span><br>';
+            $taxes=$sousTotal*0.05;
+            $taxes+=$sousTotal*0.09975;
+            $sousTotalT=number_format($sousTotal+$taxes, 2, '.', ',');
+            echo '<span class="produitDescPrixBlack" >Sous total avec taxes : </span><span class="produitDescPrix">'.$sousTotalT.'$CAN</span><br>';
+
+            //Bouton de paiement
+            echo '<br><br><a href="'.$this->basePath().'/panier/paiement" class="btn btn-outlined btn-block btn-primary">Payer le panier</a>';
+        }
+        //Si le panier est vide
+        else{
+            echo "Panier vide";
+        }
+        ?>
+
+</main>

@@ -1,0 +1,26 @@
+<header>
+</header>
+
+<main>
+
+    <?php
+         if($this->result){
+            $achatStatut="Transaction réussie";
+        }else{
+            $achatStatut="Transaction refusée";
+        }
+
+        echo "</br>";
+        //Génére numéro de transaction
+        $achatTransaction = substr(str_shuffle(str_repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5).rand(1000000000,9999999999);
+
+        echo "<div class='in row' style='display:block;text-align:center;width:100%;'>";
+        echo '<strong><h1 class="achatStatut">'.$achatStatut.'</h1></strong><br><br>';
+        echo '<span style="font-size:20px">Identifiant de la transaction : <span class="achatTransaction">'.$achatTransaction.'</span></span><br>';
+        echo '</div>';
+
+        echo '<div class="in row" style="display:block;text-align:center;width:100%;">';
+        echo '<strong><h1>'.$achatTransaction.'</h1></strong><br><br>';
+        echo '</div>';
+    ?>
+</main>
