@@ -1,0 +1,38 @@
+Application/
+	src/
+		Controller/
+			Factories/
+			IndexController.php
+				>redirige vers /user/
+			SerieController.php
+				> verif utilisateur avec id
+				> ajouterFavorisAction
+				> followSerieAction
+				> unfollowSerieAction
+				> noterSerieAction
+				> voirSaisonAction (ajout bdd et refresh)
+			SaisonController.php
+				> voirEpisodeAction (ajout bdd et refresh)
+				> verif utilisateur avec id
+	
+	view/
+		layout/layout.phtml
+			> Recherche
+			> Deconnexion
+			> Nom profil+pdp
+		index/index.phtml
+		serie/serie.phtml
+		saison/saison.phtml
+
+User/
+	src/
+		Controller/
+			UserController.php
+			StatsController.php
+			AdministrationController.php
+				> modifier(pseudo, mdp, email, pdp)
+			
+	view/
+		user/user.phtml
+		stats/stats.phtml
+		administration/administration.phtml
