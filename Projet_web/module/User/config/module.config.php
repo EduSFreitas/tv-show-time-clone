@@ -56,6 +56,26 @@ return [
                     ],
                 ],
             ],
+            'changerPhoto' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/user/administration/changerPhoto',
+                    'defaults' => [
+                        'controller' => Controller\AdministrationController::class,
+                        'action'     => 'changerPhoto',
+                    ],
+                ],
+            ],
+            'changerMail' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/user/administration/changerMail',
+                    'defaults' => [
+                        'controller' => Controller\AdministrationController::class,
+                        'action'     => 'changerMail',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -64,11 +84,14 @@ return [
             Controller\UserController::class => Controller\Factories\UserControllerFactory::class,
             Controller\StatsController::class => Controller\Factories\StatsControllerFactory::class,
             Controller\AdministrationController::class => Controller\Factories\AdministrationControllerFactory::class,
+
         ],
     ],
 
     'service_manager' => [
         'factories' => [
+            Services\UtilisateurSerieTable::class => Services\Factories\UtilisateurSerieTableFactory::class,
+            Services\UtilisateurSerieTableGateway::class => Services\Factories\UtilisateurSerieTableGatewayFactory::class,
 
             // Factory permettant de gérer la base de données
             Services\UserManager::class => Services\Factories\UserManagerFactory::class,

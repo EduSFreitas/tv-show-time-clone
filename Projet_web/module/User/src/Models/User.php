@@ -7,6 +7,7 @@ class User {
     public $_salt;
     public $_mail;
     public $_password;
+    public $_picture;
 
     public function __construct(){
 
@@ -17,6 +18,7 @@ class User {
         $this->_username = (!empty($data['username'])) ? $data['username'] : null;
         $this->_salt = (!empty($data['salt'])) ? $data['salt'] : null;
         $this->_mail = (!empty($data['mail'])) ? $data['mail'] : null;
+        $this->_picture = (!empty($data['picture'])) ? $data['picture'] : null;
         $this->_password = (!empty($data['password'])) ? $data['password'] : null;
     }
 
@@ -26,6 +28,7 @@ class User {
             'username' => $this->_username,
             'salt' => $this->_salt,
             'mail' => $this->_mail,
+            'picture' => $this->_picture,
             'password' => $this->_password
         ];
     }

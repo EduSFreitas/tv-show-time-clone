@@ -44,22 +44,28 @@ class AdministrationController extends AbstractActionController
         //changer le mail
 
 
-//        //Récupère id de l'utilisateur connecté
-//        $id=$this->userManager->findByMail($this->authService->getIdentity())->_id;
-//
-//        $ancienMail=$this->authService->getIdentity();
-//
-//        //Récupère données du formulaire
-//        $request= $this->getRequest()->getPost();
-//
-//        //Recupere le nouveau mail depuis le formulaire
-//        $nouveauMail=$request['mail'];
-//
-//        //Demande une maj du mail à UserManager
-//        $this->userManager->changerMail($ancienMail,$nouveauMail);
-//
-//        //Déconnexion pour éviter certains problèmes
-//        return $this->redirect()->toRoute('logout');
+        //Récupère id de l'utilisateur connecté
+        $id=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+
+        $ancienMail=$this->authService->getIdentity();
+
+        //Récupère données du formulaire
+        $request= $this->getRequest()->getPost();
+
+        //Recupere le nouveau mail depuis le formulaire
+        $nouveauMail=$request['mail'];
+
+        //Demande une maj du mail à UserManager
+        $this->userManager->changerMail($ancienMail,$nouveauMail);
+
+        //Déconnexion pour éviter certains problèmes
+        return $this->redirect()->toRoute('logout');
+    }
+
+
+
+    public function changerPhotoAction(){
+
     }
 }
 

@@ -29,9 +29,6 @@ return [
                 'type' => Segment::class,
                 'options' => [
                     'route'    => '/serie/:idSerie',
-                    'constraints' => [
-                        'idSerie' => '[0-9]*',
-                    ],
                     'defaults' => [
                         'controller'    => Controller\SerieController::class,
                         'action'        => 'serie',

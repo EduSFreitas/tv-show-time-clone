@@ -1,13 +1,45 @@
-Index (/user/)</br>
-<a href="<?= $this->basePath()?>/user/administration">/user/administration</a></br>
-<a href="<?= $this->basePath()?>/user/stats">/user/stats</a></br> <br>
+<h2>Page User</h2><br>
 
-<a href="<?= $this->basePath()?>/serie/1">/serie/1</a></br>
-<a href="<?= $this->basePath()?>/serie/1/saison/1">/serie/1/saison/1</a></br>
-<a href="<?= $this->basePath()?>/serie/1/saison/2">/serie/1/saison/2</a></br></br>
+<br>
+
+<hr>
+
+<a href="<?= $this->basePath()?>/user/administration">Administration du compte</a></br>
+<a href="<?= $this->basePath()?>/user/stats">Stats utilisateurs</a></br><hr>
+<span><strong>Avatar : </strong></span><br>
+<img class="avatar" src="<?= $this->user->_picture?>"/><br>
+
+<span><strong>Id utilisateur : </strong> <?= $this->user->_id?></span><br>
+<span><strong>Nom d'utilisateur : </strong> <?= $this->user->_username?></span><br>
+<span><strong>Mail d'utilisateur : </strong> <?= $this->user->_mail?></span><br>
+
+<hr>
+<h3>Séries en cours</h3>
+
+<h4>Depuis bdd:</h4>
+
+<?php foreach ($series as $serie): ?>
+    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
+<?php endforeach;?>
+
+<hr>
 
 
-<a href="<?= $this->basePath()?>/serie/2">/serie/2</a></br>
-<a href="<?= $this->basePath()?>/serie/2/saison/1">/serie/2/saison/1</a></br>
-<a href="<?= $this->basePath()?>/serie/2/saison/2">/serie/2/saison/2</a></br></br>
+<h3>Séries à démarrer (à faire)</h3>
+<a href="<?= $this->basePath()?>/serie/3">Serie 3</a></br>
+<a href="<?= $this->basePath()?>/serie/4">Serie 4</a></br>
+
+<hr>
+
+<h3>Séries favorites (à faire)</h3>
+<a href="<?= $this->basePath()?>/serie/2">Serie 2</a></br>
+<a href="<?= $this->basePath()?>/serie/5">Serie 5</a></br>
+
+<hr>
+
+<h3>Séries favorites (à faire)</h3>
+<a href="<?= $this->basePath()?>/serie/2">Serie 2</a></br>
+<a href="<?= $this->basePath()?>/serie/5">Serie 5</a></br>
+
+<hr>
 

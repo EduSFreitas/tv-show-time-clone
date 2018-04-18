@@ -1,29 +1,25 @@
 Série <?=$idSerie?>
 
-<body onload="getPopularShow('reponse1','https://api.trakt.tv/shows/popular');
-            getShow('reponse2','game-of-thrones','title');
-            getShow('reponse21','game-of-thrones','year');
-            getSeasons('reponse3','game-of-thrones');
-            getPosterSeasonIMDB('reponse5','game-of-thrones');
-            getEpisodeTitle('reponse6','game-of-thrones','1');
+<body onload="getShow('titre','<?=$idSerie?>','title');
+            getShow('année','<?=$idSerie?>','year');
+            getSeasons('saisons','<?=$idSerie?>');
+            getPosterSeasonIMDB('poster','<?=$idSerie?>');
+            getEpisodeTitle('titres_episodes','<?=$idSerie?>','1');
             ">
     <script src="../js/script.js" type="text/javascript"></script>
 
-    <h1>Popular show</h1>
-    <div id="reponse1"></div>
+    <h1>Titre:  </h1>
+    <div id="titre"></div>
 
-    <h1>Show Title </h1>
-    <div id="reponse2"></div>
+    <h1>Date de sortie: </h1>
+    <div id="année"></div>
 
-    <h1>Show Date de sorti </h1>
-    <div id="reponse21"></div>
+    <h1>Saisons: </h1>
+    <div id="saisons"></div>
 
-    <h1>All seasons of Game of thrones</h1>
-    <div id="reponse3"></div>
+    <h1>Image</h1>
+    <div id="poster"></div>
 
-    <h1>Game of throne Image</h1>
-    <div id="reponse5"></div>
-
-     <h1>Game of throne Number and name episode of season 1</h1>
-    <div id="reponse6"></div>
+     <h1>Nom des episodes saison 1</h1>
+    <div id="titres_episodes"></div>
 </body>

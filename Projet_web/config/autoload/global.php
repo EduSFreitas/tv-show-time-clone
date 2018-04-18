@@ -18,7 +18,7 @@ use Zend\Session\Validator\HttpUserAgent;
 return [
     'db' => [
         'driver' => 'Pdo',
-        'dsn'    => 'mysql:dbname=tv_show;host=localhost;charset=utf8;',
+        'dsn'    => 'mysql:dbname=tv_show_time;host=localhost;charset=utf8;',
         'username' => 'root',
         'password' => '',
     ],
