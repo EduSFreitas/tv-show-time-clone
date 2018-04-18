@@ -43,6 +43,50 @@ class UtilisateurSerieTable {
         return $return;
     }
 
+    //Où episodesVus>0
+    public function fetchSeriesEnCoursByUserConnected(){
+
+        //Récupère id de l'utilisateur connecté
+        $id=$this->getUserConnected();
+
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id,'episodesVus>0']);
+        $return = array();
+        foreach( $resultSet as $r )
+            $return[]=$r;
+        return $return;
+    }
+
+    //Où episodesVus==0
+    public function fetchSeriesADemarrerByUserConnected(){
+
+        //Récupère id de l'utilisateur connecté
+        $id=$this->getUserConnected();
+
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id,'episodesVus=0']);
+
+        $return = array();
+        foreach( $resultSet as $r )
+            $return[]=$r;
+        return $return;
+    }
+
+
+    //Où favoris==1
+    public function fetchSeriesFavoritesByUserConnected(){
+
+        //Récupère id de l'utilisateur connecté
+        $id=$this->getUserConnected();
+
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id,'favoris=1']);
+
+        $return = array();
+        foreach( $resultSet as $r )
+            $return[]=$r;
+        return $return;
+    }
 
 
     //Récupère l'id de l'utilisateur connecté

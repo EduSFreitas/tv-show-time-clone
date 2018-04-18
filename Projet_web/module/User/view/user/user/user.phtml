@@ -1,6 +1,4 @@
-<h2>Page User</h2><br>
-
-<br>
+<h2>Page User</h2>
 
 <hr>
 
@@ -16,30 +14,23 @@
 <hr>
 <h3>Séries en cours</h3>
 
-<h4>Depuis bdd:</h4>
-
-<?php foreach ($series as $serie): ?>
+<?php foreach ($seriesEnCours as $serie): ?>
     <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
 <?php endforeach;?>
 
 <hr>
 
 
-<h3>Séries à démarrer (à faire)</h3>
-<a href="<?= $this->basePath()?>/serie/3">Serie 3</a></br>
-<a href="<?= $this->basePath()?>/serie/4">Serie 4</a></br>
+<h3>Séries à démarrer</h3>
+
+<?php foreach ($seriesADemarrer as $serie): ?>
+    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
+<?php endforeach;?>
 
 <hr>
 
-<h3>Séries favorites (à faire)</h3>
-<a href="<?= $this->basePath()?>/serie/2">Serie 2</a></br>
-<a href="<?= $this->basePath()?>/serie/5">Serie 5</a></br>
-
-<hr>
-
-<h3>Séries favorites (à faire)</h3>
-<a href="<?= $this->basePath()?>/serie/2">Serie 2</a></br>
-<a href="<?= $this->basePath()?>/serie/5">Serie 5</a></br>
-
-<hr>
+<h3>Séries favorites</h3>
+<?php foreach ($seriesFavorites as $serie): ?>
+    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
+<?php endforeach;?>
 

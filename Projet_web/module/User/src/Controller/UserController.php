@@ -38,9 +38,10 @@ class UserController extends AbstractActionController
 
         $user=$this->userManager->findByMail($this->authService->getIdentity());
 
-
-
         $series=$this->_utilisateurSerie->fetchByUserConnected();
+        $seriesEnCours=$this->_utilisateurSerie->fetchSeriesEnCoursByUserConnected();
+        $seriesADemarrer=$this->_utilisateurSerie->fetchSeriesADemarrerByUserConnected();
+        $seriesFavorites=$this->_utilisateurSerie->fetchSeriesFavoritesByUserConnected();
 
 
         //Récupère séries en cours
@@ -49,6 +50,9 @@ class UserController extends AbstractActionController
             'username'=>$username,
             'id'=>$id,
             'series'=>$series,
+            'seriesEnCours'=>$seriesEnCours,
+            'seriesADemarrer'=>$seriesADemarrer,
+            'seriesFavorites'=>$seriesFavorites,
         ]);
     }
 
