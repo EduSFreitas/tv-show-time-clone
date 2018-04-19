@@ -1,22 +1,22 @@
 Série <?=$idSerie?>
 
-<h1>Api:</h1>
-
-
-<?php
-//affiche json
-var_dump($serie);
-?>
-
 <body >
+	<br><a href="<?= $this->basePath()?>/user">Retour page user</a>
+	<br>
+	<img src="<?= $image->Poster?>" alt="Poster">
+    <h1><?=$serie->title?></h1>  
+    Date de sortie : <?=$serie->year?> <br>
 
-    <h1>Titre:  <?=$serie->title?></h1>
-
-    <h1>Date de sortie: <?=$serie->year?></h1>
-
+	<a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a><br>
+    <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/favoris">Ajouter à mes favoris</a><br>
+    <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/supprfavoris">Supprimer de mes favoris</a><br>
+    <hr>
     <h1>Saisons: </h1>
+	<?php 
+	$lengthObject = count($saison); 
+	for($i=0; $i<$lengthObject; $i++): ?>
+	    <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i?>"><?= $saison[$i]->number?></a><br>
+	<?php endfor ?>
+	<hr>
 
-    <h1>Image</h1>
-
-     <h1>Nom des episodes saison 1</h1>
 </body>

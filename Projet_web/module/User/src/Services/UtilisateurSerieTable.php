@@ -2,6 +2,7 @@
 namespace User\Services;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
+use User\Models\Utilisateurserie;
 
 class UtilisateurSerieTable {
     protected $_tableGateway;
@@ -12,6 +13,16 @@ class UtilisateurSerieTable {
         $this->_tableGateway = $tableGateway;
         $this->authService = $authService;
         $this->userManager = $userManager;
+    }
+
+     // Fonction permettant d'insérer une série dans la base de donnée
+    public function insertSerie(Utilisateurserie $s){
+        $this->_tableGateway->insert($s->toValues());
+    }
+
+    // Fonction permettant de modifier une valeur dans la base de donnée
+    public function UpdateStatutSerie($toUpdate, $data){
+        return $this->_tableGateway->update($data,['id' => $toUpdate->_id]);
     }
 
     //Renvoie tout
@@ -28,6 +39,10 @@ class UtilisateurSerieTable {
         return $this->_tableGateway->select(['idUtilisateur' => $idUser])->current();
     }
 
+    //Renvoie requete pour un id utilisateur
+    public function findByIdSerie($idSerie){
+        return $this->_tableGateway->select(['idSerie' => $idSerie])->current();
+    }
 
     //Récupère tous les objets du panier de l'utilisateur connecté
     public function fetchByUserConnected(){

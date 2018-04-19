@@ -10,7 +10,6 @@ function getanswerJSON(balise, url){
 
 	request.onreadystatechange = function () {
 	  if (this.readyState === 4) {
-	   
 		document.getElementById(balise).innerHTML=syntaxHighlight(JSON.parse(this.responseText));
 	  }
 	};
@@ -18,26 +17,29 @@ function getanswerJSON(balise, url){
 	request.send();
 }
 
-function getPopularShow(balise, url){
-	var request = new XMLHttpRequest();
+function getPopularShow(balise, url, verification){
+	if (verification){
+		var request = new XMLHttpRequest();
+		
+		request.open('GET', url);
 
-	request.open('GET', url);
+		request.setRequestHeader('Content-Type', 'application/json');
+		request.setRequestHeader('trakt-api-version', '2');
+		request.setRequestHeader('trakt-api-key', '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6');
 
-	request.setRequestHeader('Content-Type', 'application/json');
-	request.setRequestHeader('trakt-api-version', '2');
-	request.setRequestHeader('trakt-api-key', '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6');
+		request.onreadystatechange = function () {
+		  if (this.readyState === 4) {
+		  	var lengthObject = JSON.parse(this.responseText).length;
+		  	for(var i=0; i<lengthObject; i++){
+		   		document.getElementById(balise).innerHTML+='<p>'+JSON.parse(this.responseText)[i]['title']+' - '+JSON.parse(this.responseText)[i]['year']+'</p>';
+		  		document.getElementById(balise).innerHTML+='<input id="'+JSON.parse(this.responseText)[i]['ids']['slug']+'" type="button" value="Voir la série" onclick="afficherSerie(event)">';
+		  		//printPoster(JSON.parse(this.responseText)[i]['ids']['imdb'], balise);
+		  	}
+		  }
+		};
 
-	request.onreadystatechange = function () {
-	  if (this.readyState === 4) {
-	  	var lengthObject = JSON.parse(this.responseText).length;
-	  	for(var i=0; i<lengthObject; i++){
-	   		document.getElementById(balise).innerHTML+='<p>'+JSON.parse(this.responseText)[i]['title']+' - '+JSON.parse(this.responseText)[i]['year']+'</p>';
-	  		//printPoster(JSON.parse(this.responseText)[i]['ids']['imdb'], balise);
-	  	}
-	  }
-	};
-
-	request.send();
+		request.send();
+	}
 }
 
 // to get title or year (element) pour un show (id)
@@ -139,6 +141,37 @@ function printPoster(idIMDB, balise){
 	};
 
 	request.send();
+}
+
+// fonction de recherche par string
+function researchResult(balise, url, verification){
+	if (!verification){
+		var request = new XMLHttpRequest();
+
+		request.open('GET', url);
+
+		request.setRequestHeader('Content-Type', 'application/json');
+		request.setRequestHeader('trakt-api-version', '2');
+		request.setRequestHeader('trakt-api-key', '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6');
+
+		request.onreadystatechange = function () {
+		  if (this.readyState === 4) {
+		  	var lengthObject = JSON.parse(this.responseText).length;
+		  	for(var i=0; i<lengthObject; i++){
+		   		document.getElementById(balise).innerHTML+='<p>'+JSON.parse(this.responseText)[i]['show']['title']+' - '+JSON.parse(this.responseText)[i]['show']['year']+'</p>';
+		   		console.log(JSON.parse(this.responseText)[i]['show']['ids']['slug']);
+		  		document.getElementById(balise).innerHTML+='<input id="'+JSON.parse(this.responseText)[i]['show']['ids']['slug']+'" type="button" value="Voir la série" onclick="afficherSerie(event)">';
+		  	}
+		  }
+		};
+
+		request.send();
+	}
+}
+
+function afficherSerie(event){
+	document.location.href = "/serie/"+event.target.id;
+	//document.location.href+="/saison/"+event.target.id;
 }
 
 // retourne le json

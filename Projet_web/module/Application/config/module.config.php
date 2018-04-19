@@ -39,13 +39,66 @@ return [
                 'type' => Segment::class,
                 'options' => [
                     'route'    => '/serie/:idSerie/saison/:idSaison',
-                    'constraints' => [
+                  /*  'constraints' => [
                         'idSerie' => '[0-9]*',
                         'idSaison' => '[0-9]*',
-                    ],
+                    ],*/
                     'defaults' => [
                         'controller'    => Controller\SaisonController::class,
                         'action'        => 'saison',
+                    ],
+                ],
+            ],
+            // Ajout
+            'listeseries' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/listeseries/:page[/recherche]',
+                    'constraints' => [
+                        'page' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\ListeSeriesController::class,
+                        'action'        => 'listeseries',
+                    ],
+                ],
+            ],
+            'ajoutSerie' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/ajout',
+                    'constraints' => [
+                        //'idSerie' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\SaisonController::class,
+                        'action'        => 'ajoutSerie',
+                    ],
+                ],
+            ],
+            'ajoutFavoris' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/favoris',
+                    'constraints' => [
+                        //'idSerie' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\SaisonController::class,
+                        'action'        => 'ajoutFavoris',
+                    ],
+                ],
+            ],
+            'supprimerFavoris' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/supprfavoris',
+                    'constraints' => [
+                        //'idSerie' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\SaisonController::class,
+                        'action'        => 'supprimerFavoris',
                     ],
                 ],
             ],
@@ -71,6 +124,8 @@ return [
             Controller\IndexController::class => Controller\Factories\IndexControllerFactory::class,
             Controller\SerieController::class => Controller\Factories\SerieControllerFactory::class,
             Controller\SaisonController::class => Controller\Factories\SaisonControllerFactory::class,
+            // Ajout
+            Controller\ListeSeriesController::class => Controller\Factories\ListeSeriesControllerFactory::class,
         ],
     ],
     'view_helpers' => [
