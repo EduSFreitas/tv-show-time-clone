@@ -22,7 +22,10 @@ class UtilisateurSerieTable {
 
     // Fonction permettant de modifier une valeur dans la base de donnée
     public function UpdateStatutSerie(Utilisateurserie $toUpdate, $data){
-        return $this->_tableGateway->update(['idUtilisateur' => $data['_idUtilisateur'],'favoris'=>$data['_favoris']],['idUtilisateur' => $toUpdate->_idUtilisateur,'favoris'=>$toUpdate->_favoris]);
+        if($toUpdate->_favoris == null){
+            $toUpdate->_favoris=0;
+        }
+        return $this->_tableGateway->update(['idUtilisateur' => $data['_idUtilisateur'],'idSerie' => $data['_idSerie'],'favoris'=>$data['_favoris']],['idUtilisateur' => $toUpdate->_idUtilisateur,'idSerie' => $toUpdate->_idSerie,'favoris'=>$toUpdate->_favoris]);
     }
 
     //Renvoie tout

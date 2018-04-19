@@ -107,5 +107,4 @@ class SaisonController extends AbstractActionController
         $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
         return $this->redirect()->toRoute('user');
     } 
-
 }
