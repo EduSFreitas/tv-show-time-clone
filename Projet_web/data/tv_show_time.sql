@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2018 at 06:15 PM
--- Server version: 5.7.19
--- PHP Version: 5.6.31
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  jeu. 19 avr. 2018 à 20:55
+-- Version du serveur :  5.7.21
+-- Version de PHP :  5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tv_show_time`
+-- Base de données :  `tv_show_time`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `badge`
+-- Structure de la table `badge`
 --
 
 DROP TABLE IF EXISTS `badge`;
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `badge` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `mail`, `password`, `salt`, `picture`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `user` (`id`, `username`, `mail`, `password`, `salt`, `picture`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurbadge`
+-- Structure de la table `utilisateurbadge`
 --
 
 DROP TABLE IF EXISTS `utilisateurbadge`;
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurbadge` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurepisodeserie`
+-- Structure de la table `utilisateurepisodeserie`
 --
 
 DROP TABLE IF EXISTS `utilisateurepisodeserie`;
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurepisodeserie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurserie`
+-- Structure de la table `utilisateurserie`
 --
 
 DROP TABLE IF EXISTS `utilisateurserie`;
@@ -105,17 +105,22 @@ CREATE TABLE IF NOT EXISTS `utilisateurserie` (
   `note` int(11) DEFAULT NULL,
   `favoris` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `utilisateurserie`
+-- Déchargement des données de la table `utilisateurserie`
 --
 
 INSERT INTO `utilisateurserie` (`id`, `idUtilisateur`, `idSerie`, `episodesRestants`, `episodesVus`, `note`, `favoris`) VALUES
 (1, 1, 'black-mirror', NULL, 19, NULL, 1),
 (2, 1, 'game-of-thrones', NULL, 67, NULL, 0),
-(3, 1, 'doctor-who', NULL, 0, NULL, 1),
-(4, 1, 'battlestar-galactica', NULL, 0, NULL, 0);
+(3, 1, 'doctor-who', NULL, 0, NULL, 0),
+(4, 1, 'battlestar-galactica', NULL, 0, NULL, 0),
+(5, 1, 'the-100', NULL, 0, NULL, 1),
+(10, 1, 'friends', NULL, 0, NULL, 0),
+(11, 1, 'black-mirror', NULL, 0, NULL, 0),
+(12, 2, 'friends', NULL, 0, NULL, 0),
+(13, 1, 'breaking-bad', NULL, 0, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

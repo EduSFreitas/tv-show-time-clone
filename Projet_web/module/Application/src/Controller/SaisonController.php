@@ -96,8 +96,15 @@ class SaisonController extends AbstractActionController
 
    public function supprimerFavorisAction(){
         $idSerie=$this->params()->fromRoute('idSerie');
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+    
         $resultSet=$this->_utilisateurSerie->findByIdSerie($idSerie);
-        $resultSet->_favoris = 0; 
+        $resultUpdate=$this->_utilisateurSerie->findByIdSerie($idSerie);
+         
+        $resultUpdate->_favoris = 0 ; 
+        // Transformer l'objet en array
+        $resultUpdateA = (array) $resultUpdate ;
+        $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
         return $this->redirect()->toRoute('user');
     } 
 
