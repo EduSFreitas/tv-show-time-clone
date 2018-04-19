@@ -47,6 +47,11 @@ class UtilisateurSerieTable {
         return $this->_tableGateway->select(['idSerie' => $idSerie])->current();
     }
 
+    //
+    public function findByIdSerieUser( $idUser,$idSerie){
+        return $this->_tableGateway->select(['idUtilisateur' => $idUser,'idSerie' => $idSerie])->current();
+    }
+
     //Récupère tous les objets du panier de l'utilisateur connecté
     public function fetchByUserConnected(){
 
@@ -110,6 +115,11 @@ class UtilisateurSerieTable {
     //Récupère l'id de l'utilisateur connecté
     public function getUserConnected(){
         return $this->userManager->findByMail($this->authService->getIdentity())->_id;
+    }
+
+    // Fonction permettant de supprimer un élément en fonction de son id 
+    public function delete($idUser, $idSerie){
+        return $this->_tableGateway->delete(['idUtilisateur' => $idUser,'idSerie' => $idSerie]);
     }
 
 }

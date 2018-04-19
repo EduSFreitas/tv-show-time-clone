@@ -13,12 +13,23 @@ use Zend\Http\Request;
 use Zend\Json\Decoder;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use User\Services\UserManager;
+use User\Services\UtilisateurSerieTable;
+use User\Models\Utilisateurserie; 
+
 
 class SerieController extends AbstractActionController
 {
     private $_idSerie;
-    public function __construct()
+    private $authService;
+    private $userManager;
+    private $_utilisateurSerie;
+
+    public function __construct($authService,UserManager $userManager,UtilisateurSerieTable $utilisateurSerie)
     {
+        $this->authService = $authService;
+        $this->userManager = $userManager;
+        $this->_utilisateurSerie = $utilisateurSerie;
     }
 
 
@@ -31,7 +42,7 @@ class SerieController extends AbstractActionController
         //Prépare requete pour obtenir nom et date de la série 
         $request = new Request();
         $request->setMethod(Request::METHOD_GET);
-        $request->setUri('http://api.trakt.tv/shows/'.$this->_idSerie);
+        $request->setUri('http://api.trakt.tv/shows/'.$this->_idSerie.'?extended=full');
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/json',
             'trakt-api-key' => '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6',
@@ -83,12 +94,78 @@ class SerieController extends AbstractActionController
 
         //Décope le json vers php
         $resultatOMDB = Json::decode($apiOMDB->getBody());
-
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+        
+        $infoSerie=$this->_utilisateurSerie->findByIdSerie($this->_idSerie);
+        $liste=$this->_utilisateurSerie->findByIdSerieUser($idUser,$this->_idSerie); 
+        
+       
         return new ViewModel([
             'idSerie'=>$this->_idSerie,
             'serie'=>$serie,
             'saison'=>$saison,
-            'image' => $resultatOMDB
+            'image' => $resultatOMDB,
+            'infoSerie'=>$infoSerie,
+            'liste'=>$liste,
         ]);
     }
+
+    public function ajoutSerieAction(){
+        //Récupère id de l'utilisateur connecté
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+        // Récupère l'id de la série
+        $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
+        $object = new Utilisateurserie(); 
+        $object->_idUtilisateur =$idUser; 
+        $object->_idSerie = $idSerie; 
+        $object->_episodesRestants = NULL; 
+        $object->_episodesVus= 0; 
+        $object->_note=NULL;
+        $object->_favoris=0;
+        $ajouterListe = $this->_utilisateurSerie->insertSerie($object); 
+        echo "<script type='text/javascript'>alert('Votre série à bien été ajouté à votre liste');</script>";
+        return $this->redirect()->toRoute('user');      
+    }
+
+    public function suppressionSerieAction(){
+        //Récupère id de l'utilisateur connecté
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+        // Récupère l'id de la série
+        $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
+        // Supprimer la série de ma liste
+        $supprimerListe = $this->_utilisateurSerie->delete($idUser, $idSerie);  
+        echo "<script type='text/javascript'>alert('Votre série à bien été supprimé de votre liste');</script>";
+        return $this->redirect()->toRoute('user');      
+    }
+
+    public function ajoutFavorisAction(){
+        $idSerie=$this->params()->fromRoute('idSerie');
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+    
+        $resultSet=$this->_utilisateurSerie->findByIdSerie($idSerie);
+        $resultUpdate=$this->_utilisateurSerie->findByIdSerie($idSerie);
+         
+        $resultUpdate->_favoris = 1 ; 
+        // Transformer l'objet en array
+        $resultUpdateA = (array) $resultUpdate ;
+        $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
+        echo "<script type='text/javascript'>alert('Votre série est maintenant dans vos favoris');</script>";
+        return $this->redirect()->toRoute('user');
+    }
+
+    public function supprimerFavorisAction(){
+        $idSerie=$this->params()->fromRoute('idSerie');
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+    
+        $resultSet=$this->_utilisateurSerie->findByIdSerie($idSerie);
+        $resultUpdate=$this->_utilisateurSerie->findByIdSerie($idSerie);
+         
+        $resultUpdate->_favoris = 0 ; 
+        // Transformer l'objet en array
+        $resultUpdateA = (array) $resultUpdate ;
+        $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
+        echo "<script type='text/javascript'>alert('Votre série ne fait plus partie de vos favoris');</script>";
+        return $this->redirect()->toRoute('user');
+    } 
+
 }

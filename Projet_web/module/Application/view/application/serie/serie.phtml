@@ -6,10 +6,36 @@ Série <?=$idSerie?>
 	<img src="<?= $image->Poster?>" alt="Poster">
     <h1><?=$serie->title?></h1>  
     Date de sortie : <?=$serie->year?> <br>
+    Status : <?php if($serie->status == 'ended'){
+    				echo 'Terminé';
+    			}
+    			else {
+    				echo 'En cours';
+    			}?> <br>
+    Chaine : <?=$serie->network?> <br>
+    Pays : <?=$serie->country?> <br>
+    Description : <?=$serie->overview?> <br>
 
-	<a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a><br>
+    Genres : <?php for($i=0;$i<sizeof($serie->genres);$i++){
+    			if($i==sizeof($serie->genres)-1){
+    				echo $serie->genres[$i].'.';
+    			}
+    			else {
+    				echo $serie->genres[$i].', ';
+    			}
+    		}?>
+   	<hr>
+    <?php if(isset($liste)==null): ?>
+	   <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a><br>
+    <?php else : ?>
+        <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/suppression">Supprimer de ma liste</a><br>
+	<?php endif; ?>
+	<?php if((isset($infoSerie->_favoris)==null || 0) && $liste!=null ): ?>
     <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/favoris">Ajouter à mes favoris</a><br>
+    <?php endif; ?>
+    <?php if(isset($infoSerie->_favoris)==1): ?>
     <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/supprfavoris">Supprimer de mes favoris</a><br>
+    <?php endif; ?>
     <hr>
     <h1>Saisons: </h1>
 	<?php 
