@@ -24,6 +24,7 @@ return [
     'Zend\Form',
     'Zend\Validator',
     'Zend\Paginator',
+    'Zend\Json\Json',
     'Application',
     'User',
 ];
