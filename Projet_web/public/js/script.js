@@ -196,3 +196,63 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+
+
+
+//** --- A GARDER --- **//
+
+//Est appelé à un nouveau caractère dans la barre de recherche
+function majSearch(){
+    //Envoie le contenu de search
+    getSeriesRecherche(document.getElementById("searchInput").value);
+}
+
+
+//Recherche des séries (barre de recherche)
+function getSeriesRecherche(recherche){
+
+    var request = new XMLHttpRequest();
+    var url = 'https://api.trakt.tv/search/show?query='+recherche;
+    request.open('GET', url);
+
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('trakt-api-version', '2');
+    request.setRequestHeader('trakt-api-key', '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6');
+
+    request.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                reponse=JSON.parse(this.responseText);
+                console.log(reponse);
+
+                //Si la recherche ne renvoie rien, reste sur les résultats précédents
+				if(reponse[0] && reponse[1] && reponse[2]){
+                    //Vide les champs, renseigne le titre et la date
+                    document.getElementById("search"+1).innerHTML=reponse[0]['show']['title']+"</br><span id='search1Date'>"+reponse[0]['show']['year']+"</span>";
+                    document.getElementById("search"+1).setAttribute('href', 'http://google.com');
+
+                    document.getElementById("search"+2).innerHTML=reponse[1]['show']['title']+"</br><span id='search2Date'>"+reponse[1]['show']['year']+"</span>";
+                    document.getElementById("search"+2).setAttribute('href', '#');
+
+                    document.getElementById("search"+3).innerHTML=reponse[2]['show']['title']+"</br><span id='search3Date'>"+reponse[2]['show']['year']+"</span>";
+                    document.getElementById("search"+3).setAttribute('href', '#');
+
+                    //todo: lien vers série
+
+				}
+            }
+    };
+
+    request.send();
+
+
+}
+
+
+function displaySearch(){
+    document.getElementById("results").classList.remove("hidden");
+}
+
+//todo: Ne marche pas, à vérifier
+function hideSearch(){
+    // document.getElementById("results").classList.add("hidden");
+}

@@ -20,17 +20,51 @@
         <?= $this->headScript()
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+            ->prependFile($this->basePath('js/script.js'))
+
         ?>
+
     </head>
     <body>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
     <header>
             <div id="header" class="row justify-content-between">
                 <div class="logo col-lg-3 col-md-3 col-sm-3 col-4">
                     <a href="<?= $this->basePath()?>" ><img src="http://jhaegman.com/tabourets_corp.png"/></a>
                 </div>
-                <div>
+
+
+
+
+                <!--Recherche-->
+                <section class="main">
+                    <form id="search" class="search" action="#" >
+                        <input type="text" placeholder="Search..." id="searchInput" value=""  onfocus="displaySearch()" onblur="hideSearch()" onclick="majSearch()" oninput="majSearch()"  />
+                        <ul id="results" class="hidden" >
+                            <li>
+                                <a id="search1">
+                                    <br/> - <span id="search1Date"> - </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="search2">
+                                    <br/> - <span id="search2Date"> - </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="search3">
+                                    <br/> - <span id="search3Date"> - </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </section>
+
+
+
+
+
+                <div >
                     <!-- Navigation bar -->
                     <?php
                     // Render the navbar
