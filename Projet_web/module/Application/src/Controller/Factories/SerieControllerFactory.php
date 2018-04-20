@@ -20,6 +20,9 @@ class SerieControllerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container,
                              $requestedName, array $options = null)
     {
-        return new SerieController();
+    	$authService = $container->get(\Zend\Authentication\AuthenticationService::class);
+        $userManager = $container->get(\User\Services\UserManager::class);
+        $utilisateurSerie = $container->get(\User\Services\UtilisateurSerieTable::class);
+        return new SerieController($authService,$userManager,$utilisateurSerie);
     }
 }

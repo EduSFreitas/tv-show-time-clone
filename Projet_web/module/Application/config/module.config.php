@@ -71,8 +71,21 @@ return [
                         //'idSerie' => '[0-9]*',
                     ],
                     'defaults' => [
-                        'controller'    => Controller\SaisonController::class,
+                        'controller'    => Controller\SerieController::class,
                         'action'        => 'ajoutSerie',
+                    ],
+                ],
+            ],
+            'suppressionSerie' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/suppression',
+                    'constraints' => [
+                        //'idSerie' => '[0-9]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\SerieController::class,
+                        'action'        => 'suppressionSerie',
                     ],
                 ],
             ],
@@ -84,7 +97,7 @@ return [
                         //'idSerie' => '[0-9]*',
                     ],
                     'defaults' => [
-                        'controller'    => Controller\SaisonController::class,
+                        'controller'    => Controller\SerieController::class,
                         'action'        => 'ajoutFavoris',
                     ],
                 ],
@@ -97,7 +110,7 @@ return [
                         //'idSerie' => '[0-9]*',
                     ],
                     'defaults' => [
-                        'controller'    => Controller\SaisonController::class,
+                        'controller'    => Controller\SerieController::class,
                         'action'        => 'supprimerFavoris',
                     ],
                 ],
