@@ -205,6 +205,7 @@ function syntaxHighlight(json) {
 function majSearch(){
     //Envoie le contenu de search
     getSeriesRecherche(document.getElementById("searchInput").value);
+
 }
 
 
@@ -222,19 +223,23 @@ function getSeriesRecherche(recherche){
     request.onreadystatechange = function () {
             if (this.readyState === 4) {
                 reponse=JSON.parse(this.responseText);
-                console.log(reponse);
+
+                //Récupère le basepath (url de base), cachée dans un champs hidden
+				var basepath=document.getElementById("searchInputBasePath").value;
+
 
                 //Si la recherche ne renvoie rien, reste sur les résultats précédents
 				if(reponse[0] && reponse[1] && reponse[2]){
-                    //Vide les champs, renseigne le titre et la date
+
+                    //Vide les champs, renseigne le titre et la date. Assigne ensuite l'url ajoutée au basepath
                     document.getElementById("search"+1).innerHTML=reponse[0]['show']['title']+"</br><span id='search1Date'>"+reponse[0]['show']['year']+"</span>";
-                    document.getElementById("search"+1).setAttribute('href', 'http://google.com');
+                    document.getElementById("search"+1).setAttribute('href', basepath+'/serie/'+reponse[0]['show']['ids']['slug']);
 
                     document.getElementById("search"+2).innerHTML=reponse[1]['show']['title']+"</br><span id='search2Date'>"+reponse[1]['show']['year']+"</span>";
-                    document.getElementById("search"+2).setAttribute('href', '#');
+                    document.getElementById("search"+2).setAttribute('href', basepath+'/serie/'+reponse[1]['show']['ids']['slug']);
 
                     document.getElementById("search"+3).innerHTML=reponse[2]['show']['title']+"</br><span id='search3Date'>"+reponse[2]['show']['year']+"</span>";
-                    document.getElementById("search"+3).setAttribute('href', '#');
+                    document.getElementById("search"+3).setAttribute('href', basepath+'/serie/'+reponse[2]['show']['ids']['slug']);
 
                     //todo: lien vers série
 

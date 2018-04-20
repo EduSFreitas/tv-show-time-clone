@@ -39,6 +39,7 @@
                 <!--Recherche-->
                 <section class="main">
                     <form id="search" class="search" action="#" >
+                        <input type="hidden" id="searchInputBasePath" value="<?=$this->basePath()?>"/>
                         <input type="text" placeholder="Search..." id="searchInput" value=""  onfocus="displaySearch()" onblur="hideSearch()" onclick="majSearch()" oninput="majSearch()"  />
                         <ul id="results" class="hidden" >
                             <li>
