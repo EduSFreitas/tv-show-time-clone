@@ -115,6 +115,19 @@ return [
                     ],
                 ],
             ],
+            'noter' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/note/:note',
+                    'constraints' => [
+                        'note' => '[1-5]',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\SerieController::class,
+                        'action'        => 'noter',
+                    ],
+                ],
+            ],
         ],
     ],
     'access_filter' => [

@@ -169,6 +169,18 @@ class SerieController extends AbstractActionController
         $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
         echo "<script type='text/javascript'>alert('Votre série ne fait plus partie de vos favoris');</script>";
         return $this->redirect()->toRoute('user');
-    } 
+    }
 
+
+    public function noterAction(){
+        $note=$this->params()->fromRoute('note');
+
+        $idSerie=$this->params()->fromRoute('idSerie');
+
+        $this->_utilisateurSerie->noterByUserConnected($note,$idSerie);
+
+        return $this->redirect()->toRoute('user');
+
+
+    }
 }

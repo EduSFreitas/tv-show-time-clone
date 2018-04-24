@@ -156,5 +156,16 @@ class UtilisateurSerieTable {
             $i+=$r->_episodesVus;
         return $i;
     }
+
+    //Change la note
+    public function noterByUserConnected($note,$idSerie){
+        $idUser=$this->getUserConnected();
+        //$res=$this->_tableGateway->select(['idUtilisateur' => $idUser,'idSerie' => $idSerie]);
+        //$res->update();
+
+
+        return $this->_tableGateway->update(['note'=>$note],['idUtilisateur'=>$idUser,'idSerie'=>$idSerie]);
+
+    }
 }
 ?>

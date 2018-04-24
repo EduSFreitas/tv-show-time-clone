@@ -271,6 +271,10 @@ td{
 
 /* Note */
 .checked {
-    color: orange;
+    color: orange !important;
     cursor: pointer;
+}
+
+.notes a{
+    color:black;
 }
