@@ -261,3 +261,22 @@ function displaySearch(){
 function hideSearch(){
     // document.getElementById("results").classList.add("hidden");
 }
+
+
+function note(note){
+    star2=document.getElementById("star2");
+    star3=document.getElementById("star3");
+    star4=document.getElementById("star4");
+    star5=document.getElementById("star5");
+
+    if(note>=2){star2.classList.add("checked")}
+    if(note>=3){star3.classList.add("checked")}
+    if(note>=4){star4.classList.add("checked")}
+    if(note>=5){star5.classList.add("checked")}
+
+    if(note<5){star5.classList.remove("checked")}
+    if(note<4){star4.classList.remove("checked")}
+    if(note<3){star3.classList.remove("checked")}
+    if(note<2){star2.classList.remove("checked")}
+
+}

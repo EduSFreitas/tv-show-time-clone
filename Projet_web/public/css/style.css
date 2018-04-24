@@ -272,4 +272,5 @@ td{
 /* Note */
 .checked {
     color: orange;
+    cursor: pointer;
 }

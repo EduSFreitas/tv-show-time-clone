@@ -1,43 +1,40 @@
 Série <?=$idSerie?>
 
+<!-- Import des étoiles pour les notes -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<br><a href="<?= $this->basePath()?>/user">Retour page user</a>
 	<br>
-    <div>
         <span>Note: <?=$liste->_note?></span>
         <strong>Note : </strong>
-        <!-- Add icon library -->
-        <span class="fa fa-star <?php if($liste->_note>=1)echo 'checked'?>"></span>
-        <span class="fa fa-star <?php if($liste->_note>=2)echo 'checked'?>"></span>
-        <span class="fa fa-star <?php if($liste->_note>=3)echo 'checked'?>"></span>
-        <span class="fa fa-star <?php if($liste->_note>=4)echo 'checked'?>"></span>
-        <span class="fa fa-star <?php if($liste->_note>=5)echo 'checked'?>"></span>
-    </div>
+
+        <!-- Quand on hover une étoile, met à jour l'affichage avec note(idHover). Quand on sort de la div, remet l'affichage avec note(notePHP)-->
+        <div onmouseleave="note(<?=$liste->_note?>)">
+            <span id="star1" class="fa fa-star checked" onmouseover="note(1)"></span>
+            <span id="star2" class="fa fa-star" onmouseover="note(2)"></span>
+            <span id="star3" class="fa fa-star" onmouseover="note(3)"></span>
+            <span id="star4" class="fa fa-star" onmouseover="note(4)"></span>
+            <span id="star5" class="fa fa-star" onmouseover="note(5)"></span>
+        </div>
 
 
 
 	<img src="<?= $image->Poster?>" alt="Poster">
     <h1><?=$serie->title?></h1>  
-    Date de sortie : <?=$serie->year?> <br>
-    Status : <?php if($serie->status == 'ended'){
-    				echo 'Terminé';
-    			}
-    			else {
-    				echo 'En cours';
-    			}?> <br>
-    Chaine : <?=$serie->network?> <br>
-    Pays : <?=$serie->country?> <br>
-    Description : <?=$serie->overview?> <br>
+    <span><strong>Date de sortie : </strong> <?=$serie->year?></span> <br>
+    <span><strong>Status : </strong> <?php if($serie->status == 'ended'){echo 'Terminé';}else {echo 'En cours';}?> </span><br>
+<span><strong>Chaine : </strong> <?=$serie->network?> </span><br>
+<span><strong>Pays : </strong><?=$serie->country?> </span><br>
+    <span><strong>Description : </strong><?=$serie->overview?> </span><br>
 
-    Genres : <?php for($i=0;$i<sizeof($serie->genres);$i++){
+    <span><strong>Genres : </strong><?php for($i=0;$i<sizeof($serie->genres);$i++){
     			if($i==sizeof($serie->genres)-1){
     				echo $serie->genres[$i].'.';
     			}
     			else {
     				echo $serie->genres[$i].', ';
     			}
-    		}?>
+    		}?></span>
    	<hr>
     <?php if(isset($liste)==null): ?>
 	   <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a><br>
@@ -59,3 +56,9 @@ Série <?=$idSerie?>
 	<?php endfor ?>
 	<hr>
 
+
+
+<script>
+    //Affiche la note recue en php au lancement de la page
+    note(<?=$liste->_note?>);
+</script>
