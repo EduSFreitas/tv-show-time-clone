@@ -99,7 +99,10 @@ class SerieController extends AbstractActionController
         $infoSerie=$this->_utilisateurSerie->findByIdSerie($this->_idSerie);
         $liste=$this->_utilisateurSerie->findByIdSerieUser($idUser,$this->_idSerie); 
         
-       
+
+
+        //Renvoi de la note de l'utilisateur
+
         return new ViewModel([
             'idSerie'=>$this->_idSerie,
             'serie'=>$serie,

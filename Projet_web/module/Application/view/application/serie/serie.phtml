@@ -1,8 +1,22 @@
 Série <?=$idSerie?>
 
-<body >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<br><a href="<?= $this->basePath()?>/user">Retour page user</a>
 	<br>
+    <div>
+        <span>Note: <?=$liste->_note?></span>
+        <strong>Note : </strong>
+        <!-- Add icon library -->
+        <span class="fa fa-star <?php if($liste->_note>=1)echo 'checked'?>"></span>
+        <span class="fa fa-star <?php if($liste->_note>=2)echo 'checked'?>"></span>
+        <span class="fa fa-star <?php if($liste->_note>=3)echo 'checked'?>"></span>
+        <span class="fa fa-star <?php if($liste->_note>=4)echo 'checked'?>"></span>
+        <span class="fa fa-star <?php if($liste->_note>=5)echo 'checked'?>"></span>
+    </div>
+
+
+
 	<img src="<?= $image->Poster?>" alt="Poster">
     <h1><?=$serie->title?></h1>  
     Date de sortie : <?=$serie->year?> <br>
@@ -45,4 +59,3 @@ Série <?=$idSerie?>
 	<?php endfor ?>
 	<hr>
 
-</body>
