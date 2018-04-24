@@ -52,7 +52,7 @@ class UtilisateurSerieTable {
         return $this->_tableGateway->select(['idUtilisateur' => $idUser,'idSerie' => $idSerie])->current();
     }
 
-    //Récupère tous les objets du panier de l'utilisateur connecté
+    //Récupère tous les series de l'utilisateur connecté
     public function fetchByUserConnected(){
 
         //Récupère id de l'utilisateur connecté
@@ -122,5 +122,39 @@ class UtilisateurSerieTable {
         return $this->_tableGateway->delete(['idUtilisateur' => $idUser,'idSerie' => $idSerie]);
     }
 
+
+
+    //Renvoie nb de series suivies
+    public function countByUserConnected(){
+
+        //Récupère id de l'utilisateur connecté
+        $id=$this->getUserConnected();
+
+        $i=0;
+
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);
+
+        //Compte
+        foreach( $resultSet as $r )
+            $i++;
+        return $i;
+    }
+
+    //Renvoie nb d'épisodes vus
+    public function countEpisodesbyUserConnected(){
+        //Récupère id de l'utilisateur connecté
+        $id=$this->getUserConnected();
+
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);
+
+        $i=0;
+
+        //Compte
+        foreach( $resultSet as $r )
+            $i+=$r->_episodesVus;
+        return $i;
+    }
 }
 ?>

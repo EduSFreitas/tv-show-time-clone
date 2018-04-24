@@ -30,9 +30,6 @@ class UserController extends AbstractActionController
         //Récupère id de l'utilisateur connecté
         $id=$this->userManager->findByMail($this->authService->getIdentity())->_id;
 
-        //Récupère mail de l'utilisateur connecté
-        $mail=$this->authService->getIdentity();
-
         //Récupère pseudo de l'utilisateur connecté
         $username=$this->userManager->findByMail($this->authService->getIdentity())->_username;
 
@@ -47,7 +44,6 @@ class UserController extends AbstractActionController
         //Récupère séries en cours
         return new ViewModel([
             'user'=>$user,
-            'username'=>$username,
             'id'=>$id,
             'series'=>$series,
             'seriesEnCours'=>$seriesEnCours,
