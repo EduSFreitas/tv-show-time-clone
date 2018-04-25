@@ -8,7 +8,7 @@ Série <?=$idSerie?>
         <strong>Note : </strong>
 
         <!-- Quand on hover une étoile, met à jour l'affichage avec note(idHover). Quand on sort de la div, remet l'affichage avec note(notePHP)-->
-        <div class="notes" onmouseleave="note(<?=$liste->_note?>)">
+        <div class="notes" onmouseleave="note(<?=isset($liste->_note)?>)">
             <a id="star1" onmouseover="note(1)" href="<?= $this->basePath().'/serie/'.$idSerie?>/note/1"><div class="fa fa-star"></div></a>
             <a id="star2" onmouseover="note(2)" href="<?= $this->basePath().'/serie/'.$idSerie?>/note/2"><div class="fa fa-star"></div></a>
             <a id="star3" onmouseover="note(3)" href="<?= $this->basePath().'/serie/'.$idSerie?>/note/3"><div class="fa fa-star"></div></a>
@@ -47,19 +47,12 @@ Série <?=$idSerie?>
     <a href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/supprfavoris">Supprimer de mes favoris</a><br>
     <?php endif; ?>
     <hr>
-    <h1>Saisons: </h1>
 	<?php 
 	$lengthObject = count($saison); 
-	for($i=0; $i<$lengthObject; $i++): ?>
-	    <?php if($saison[$i]->number=="0"): ?>
-        <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i?>"><?= $saison[$i]->number?></a><br>
-        <?php endif ?>
-        <?php if($saison[$i]->number!="0") :?>
-        <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i+1?>"><?= $saison[$i]->number?></a><br>
-        <?php endif ?>
+	for($i=1; $i<$lengthObject; $i++): ?>
+        <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i?>">Saison <?= $saison[$i]->number?></a><br>
 	<?php endfor ?>
 	<hr>
-
 
 
 <script>
