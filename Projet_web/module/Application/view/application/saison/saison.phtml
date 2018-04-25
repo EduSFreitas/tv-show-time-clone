@@ -5,7 +5,38 @@ Série <?=$idSerie?> - Saison <?=$idSaison?>
     <?php 
 	$lengthObject = count($episode); 
 	for($i=0; $i<$lengthObject; $i++): ?>
+		<?php if($tab[$i+1] == false) :?> <input type="checkbox" name="episode[]" value="<?=$i?>">
+		<?php endif; ?> 
+		<?php if($tab[$i+1] == true) :?> <input type="checkbox" name="episode[]" value="<?=$i?>" checked >
+		<?php endif; ?> 
 		<?= $episode[$i]->number?> - 
 	   	<?= $episode[$i]->title?><br>
+	  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/check/<?=$i+1?>" style="display: none;" id="urlCheck<?=$i?>"></a>
+	  	
+	  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/uncheck/<?=$i+1 ?>" style="display: none;" id="unCheck<?=$i?>"></a>
 	<?php endfor ?>
+
+	
 </body>
+
+<script type="text/javascript">
+	function changerURL(event) {
+		var isChecked = event.target.checked;
+		if (!isChecked) {
+			window.location=document.getElementById('unCheck'+event.target.value);
+			alert("Vous avez marqué l'épisode comme étant non vus");
+		} else { 
+			window.location=document.getElementById('urlCheck'+event.target.value);
+			alert("Vous avez marqué l'épisode comme vus");
+		}
+		
+	}
+
+
+	//initalisation
+	var tab = document.getElementsByTagName('input');
+	for (var i = tab.length - 1; i >= 0; i--) {
+		tab[i].addEventListener("change",changerURL);
+
+	}
+</script>

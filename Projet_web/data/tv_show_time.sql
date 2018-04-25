@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 19 avr. 2018 à 23:52
+-- Généré le :  mer. 25 avr. 2018 à 04:24
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -84,10 +84,19 @@ DROP TABLE IF EXISTS `utilisateurepisodeserie`;
 CREATE TABLE IF NOT EXISTS `utilisateurepisodeserie` (
   `idUtilisateur` int(11) NOT NULL,
   `idSerie` varchar(50) NOT NULL,
+  `idSaison` int(11) NOT NULL,
   `idEpisode` int(11) NOT NULL,
-  `note` int(11) NOT NULL,
-  `vu` tinyint(1) NOT NULL
+  `note` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `utilisateurepisodeserie`
+--
+
+INSERT INTO `utilisateurepisodeserie` (`idUtilisateur`, `idSerie`, `idSaison`, `idEpisode`, `note`) VALUES
+(1, 'the-100', 3, 5, 0),
+(1, 'the-100', 1, 3, 0),
+(1, 'sherlock', 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -112,15 +121,15 @@ CREATE TABLE IF NOT EXISTS `utilisateurserie` (
 --
 
 INSERT INTO `utilisateurserie` (`id`, `idUtilisateur`, `idSerie`, `episodesRestants`, `episodesVus`, `note`, `favoris`) VALUES
-(2, 1, 'game-of-thrones', NULL, 67, NULL, 1),
+(2, 1, 'game-of-thrones', NULL, 66, NULL, 1),
 (15, 1, 'doctor-who-2005', NULL, 0, NULL, 0),
-(5, 1, 'the-100', NULL, 25, NULL, 1),
+(5, 1, 'the-100', NULL, 21, NULL, 1),
 (10, 1, 'friends', NULL, 0, NULL, 0),
-(14, 1, 'the-walking-dead', NULL, 35, NULL, 1),
+(14, 1, 'the-walking-dead', NULL, 30, NULL, 1),
 (12, 2, 'friends', NULL, 0, NULL, 0),
 (13, 1, 'breaking-bad', NULL, 0, NULL, 0),
-(20, 1, 'stranger-things', NULL, 10, NULL, 1),
-(19, 1, 'sherlock', NULL, 0, NULL, 0),
+(20, 1, 'stranger-things', NULL, 7, NULL, 1),
+(19, 1, 'sherlock', NULL, 1, NULL, 0),
 (24, 1, 'how-i-met-your-mother', NULL, 0, NULL, 0),
 (27, 1, 'lost-2004', NULL, 0, NULL, 0);
 COMMIT;

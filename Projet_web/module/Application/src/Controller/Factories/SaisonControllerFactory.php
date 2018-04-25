@@ -17,9 +17,13 @@ class SaisonControllerFactory implements FactoryInterface
      * This method creates the Zend\Authentication\AuthenticationService service
      * and returns its instance.
      */
-    public function __invoke(ContainerInterface $container,
+     public function __invoke(ContainerInterface $container,
                              $requestedName, array $options = null)
     {
-        return new SaisonController();
+    	$authService = $container->get(\Zend\Authentication\AuthenticationService::class);
+        $userManager = $container->get(\User\Services\UserManager::class);
+        $utilisateurSerie = $container->get(\User\Services\UtilisateurSerieTable::class);
+        $utilisateurEpisodeSerie = $container->get(\User\Services\UtilisateurEpisodeSerieTable::class);
+        return new SaisonController($authService,$userManager,$utilisateurSerie, $utilisateurEpisodeSerie);
     }
 }

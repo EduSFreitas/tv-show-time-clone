@@ -128,6 +128,26 @@ return [
                     ],
                 ],
             ],
+            'unCheck' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/saison/:idSaison/uncheck/:idUnCheck',
+                    'defaults' => [
+                        'controller'    => Controller\SaisonController::class,
+                        'action'        => 'unCheck',
+                    ],
+                ],
+            ],
+            'check' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/serie/:idSerie/saison/:idSaison/check/:idCheck',
+                    'defaults' => [
+                        'controller'    => Controller\SaisonController::class,
+                        'action'        => 'check',
+                    ],
+                ],
+            ],
         ],
     ],
     'access_filter' => [
@@ -138,7 +158,7 @@ return [
             Controller\IndexController::class => [
                 ['actions' => ['index'], 'allow' => '*'],
             ],
-        ]
+        ],
     ],
     'service_manager' => [
         'factories' => [

@@ -15,7 +15,7 @@ class UtilisateurSerieTable {
         $this->userManager = $userManager;
     }
 
-     // Fonction permettant d'insérer une série dans la base de donnée
+    // Fonction permettant d'insérer une série dans la base de donnée
     public function insertSerie(Utilisateurserie $s){
         $this->_tableGateway->insert($s->toValues());
     }
@@ -27,6 +27,21 @@ class UtilisateurSerieTable {
         }
         return $this->_tableGateway->update(['idUtilisateur' => $data['_idUtilisateur'],'idSerie' => $data['_idSerie'],'favoris'=>$data['_favoris']],['idUtilisateur' => $toUpdate->_idUtilisateur,'idSerie' => $toUpdate->_idSerie,'favoris'=>$toUpdate->_favoris]);
     }
+
+    // Fonction permettant d'incrémenter le nombre d'épisode vus
+    public function UpdateNbEpisode(Utilisateurserie $toUpdate, $data){
+         if($toUpdate->_episodesVus == null){
+            $toUpdate->_episodesVus=0;
+        }
+        return $this->_tableGateway->update(
+            ['idUtilisateur' => $data['_idUtilisateur'],
+            'idSerie' => $data['_idSerie'],
+            'episodesVus'=>$data['_episodesVus']],
+            ['idUtilisateur' => $toUpdate->_idUtilisateur,
+            'idSerie' => $toUpdate->_idSerie,
+            'episodesVus'=>$toUpdate->_episodesVus]);
+    }
+
 
     //Renvoie tout
     public function fetchAll() {

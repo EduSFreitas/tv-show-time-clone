@@ -93,6 +93,9 @@ return [
             Services\UtilisateurSerieTable::class => Services\Factories\UtilisateurSerieTableFactory::class,
             Services\UtilisateurSerieTableGateway::class => Services\Factories\UtilisateurSerieTableGatewayFactory::class,
 
+            Services\UtilisateurEpisodeSerieTable::class => Services\Factories\UtilisateurEpisodeSerieTableFactory::class,
+            Services\UtilisateurEpisodeSerieTableGateway::class => Services\Factories\UtilisateurEpisodeSerieTableGatewayFactory::class,
+
             // Factory permettant de gérer la base de données
             Services\UserManager::class => Services\Factories\UserManagerFactory::class,
             // Factory permettant de gérer la passerelle entre la base de données et UserManager

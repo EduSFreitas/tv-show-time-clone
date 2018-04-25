@@ -51,7 +51,12 @@ Série <?=$idSerie?>
 	<?php 
 	$lengthObject = count($saison); 
 	for($i=0; $i<$lengthObject; $i++): ?>
-	    <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i?>"><?= $saison[$i]->number?></a><br>
+	    <?php if($saison[$i]->number=="0"): ?>
+        <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i?>"><?= $saison[$i]->number?></a><br>
+        <?php endif ?>
+        <?php if($saison[$i]->number!="0") :?>
+        <a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $i+1?>"><?= $saison[$i]->number?></a><br>
+        <?php endif ?>
 	<?php endfor ?>
 	<hr>
 

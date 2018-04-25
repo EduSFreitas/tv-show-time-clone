@@ -6,30 +6,47 @@
  */
 
 namespace Application\Controller;
+
 use Zend\Json\Json;
 use Zend\Http\Client;
 use Zend\Http\Request;
 use Zend\Json\Decoder;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use User\Services\UserManager;
+use User\Services\UtilisateurSerieTable;
+use User\Models\Utilisateurserie; 
+use User\Services\UtilisateurEpisodeSerieTable;
+use User\Models\Utilisateurepisodeserie; 
+
 
 class SaisonController extends AbstractActionController
 {
 
     private $_idSerie;
     private $_idSaison;
+    private $_idEpisode;
+
+    private $authService;
+    private $userManager;
+    private $_utilisateurSerie;
+    private $_utilisateurEpisodeSerie; 
     
 
-    public function __construct()
+    public function __construct($authService,UserManager $userManager,UtilisateurSerieTable $utilisateurSerie,UtilisateurEpisodeSerieTable $utilisateurEpisodeSerie)
     {
-       
+        $this->authService = $authService;
+        $this->userManager = $userManager;
+        $this->_utilisateurSerie = $utilisateurSerie;
+        $this->_utilisateurEpisodeSerie = $utilisateurEpisodeSerie;
     }
 
     public function saisonAction()
     {
         //Récupère de la série et de la saison depuis l'url
-        $this->_idSerie=$this->params()->fromRoute('idSerie');
-        $this->_idSaison=$this->params()->fromRoute('idSaison');
+        $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
+        $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
 
         //Prépare requete pour obtenir nom et date de la série 
         $request = new Request();
@@ -48,11 +65,70 @@ class SaisonController extends AbstractActionController
 
         //Décode le json vers php
         $episode = Json::decode($api->getBody());
+        $nbEpisode= count($episode) ; 
 
+        $tab = array(); 
+
+        for($i=0 ; $i<$nbEpisode+1; $i++){
+            $req= $this->_utilisateurEpisodeSerie->select($idUser, $idSerie, $idSaison, $i);
+            if($req!=null){
+                $tab[$i]=true;
+            }
+            else{
+                $tab[$i]=false;
+            }
+        }
         return new ViewModel([
             'idSerie'=>$this->_idSerie,
             'idSaison'=>$this->_idSaison,
             'episode'=>$episode,
+            'tab'=>$tab,
         ]);
+    }
+
+    public function checkAction(){
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+        $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
+        
+        $nbEpisodeVus=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
+        $nbEpisodeVusIncrément=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
+
+        $nbEpisodeVusIncrément->_episodesVus =  $nbEpisodeVusIncrément->_episodesVus + 1 ; 
+        $nbEpisodeFinal= (array) ($nbEpisodeVusIncrément) ; 
+        $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal); 
+        //Insertion dans la base utilisateur episode serie
+        $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
+        $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idCheck'); 
+
+        $object = new Utilisateurepisodeserie(); 
+        $object->_idUtilisateur =$idUser; 
+        $object->_idSerie = $idSerie; 
+        $object->_idSaison = $idSaison;
+        $object->_idEpisode = $idEpisode ; 
+        $object->_note = 0 ; 
+
+        $ajouterEpisode = $this->_utilisateurEpisodeSerie->insert($object); 
+
+        return $this->redirect()->toRoute('user');
+    }
+
+    public function unCheckAction(){
+        $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
+        $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
+        
+        $nbEpisodeVus=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
+        $nbEpisodeVusIncrément=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
+
+        $nbEpisodeVusIncrément->_episodesVus =  $nbEpisodeVusIncrément->_episodesVus - 1 ; 
+        $nbEpisodeFinal= (array) ($nbEpisodeVusIncrément) ; 
+        $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal); 
+
+        //Suppression dans la base utilisateur episode serie
+        $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
+        $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idUnCheck'); 
+
+        $supprimerEpisode = $this->_utilisateurEpisodeSerie->delete($idUser, $idSerie, $idSaison, $idEpisode); 
+
+        return $this->redirect()->toRoute('user');
     }
 }
