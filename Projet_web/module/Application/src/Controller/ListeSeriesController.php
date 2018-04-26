@@ -32,9 +32,6 @@ class ListeSeriesController extends AbstractActionController
         //Récupère idpage depuis url (ne se reset pas à 1 quand on fait une nouvelle recherche)
         $this->_idPage=$this->params()->fromRoute('page');
 
-        //Récupère de la recherche depuis l'url
-        $this->_idRecherche = $_GET['recherche'];
-
         // Url de la requete
         $url = 'https://api.trakt.tv/search/show?query='.$this->_idRecherche.'&page='.$this->_idPage;
 

@@ -53,7 +53,7 @@ return [
             'listeseries' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'    => '/listeseries/:page[/recherche]',
+                    'route'    => '/listeseries/:page',
                     'constraints' => [
                         'page' => '[0-9]*',
                     ],

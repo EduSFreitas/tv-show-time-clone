@@ -1,19 +1,7 @@
-<h2>Page Liste Séries</h2>
-
-<a href="<?= $this->basePath()?>/user">User</a></br>
-
+<a href="<?= $this->basePath()?>/user">Retour page User</a></br>
 <body> 
-	<form name="form" action="" method="get">
-		<input type="text" name="recherche" id="recherche" placeholder="Rechercher..." value="">
-        <button onclick="<?= $page=1;?>">Chercher </button>
-	</form>
-
-	<?php if($_GET['recherche'] == null): ?>
-	    <h1>Séries populaire :  </h1>
-	<?php else: ?>
-	    <h1>Résultat de la recherche : "<?=$_GET['recherche'];?>"</h1>
-	<?php endif ?>
-
+	
+	<h1>Séries populaire :  </h1>
     <div id="result">
 		<?php for($i=0; $i<sizeof($resultat);$i++): ?>
 		    <a href="<?= $this->basePath()?>/serie/<?= $resultat[$i]->show->ids->slug?>">
@@ -28,10 +16,10 @@
 
     <div>
 		<?php if($numPage > 1): ?>
-			<a href="<?= $this->basePath()?>/listeseries/<?= $numPage-1;?>?recherche=<?=$_GET['recherche'];?>">Page précedente </a>   
+			<a href="<?= $this->basePath()?>/listeseries/<?= $numPage-1;?>">Page précedente </a>   
 		<?php endif;?>
 		<?php if($numPage < $nbPages): ?>
-			<a href="<?= $this->basePath()?>/listeseries/<?= $numPage+1;?>?recherche=<?=$_GET['recherche'];?>">Page suivante </a>    
+			<a href="<?= $this->basePath()?>/listeseries/<?= $numPage+1;?>">Page suivante </a>    
 		<?php endif;?>
 	</div>  
 
