@@ -33,7 +33,7 @@ class NavManager
         if (!$this->authService->hasIdentity()) {
             $items[] = [
                 'id' => 'login',
-                'label' => 'Sign in',
+                'label' => 'Connexion',
                 'link'  => $url('login')
             ];
         } else {
@@ -43,7 +43,22 @@ class NavManager
 
             //Récupère le pseudo de l'utilisateur connecté
             $username=$this->userManager->findByMail($this->authService->getIdentity())->_username;
-
+           
+            $items[] = [
+                'id' => 'user',
+                'label' => 'Accueil',
+                'link'  => $url('user'),
+            ];            
+            $items[] = [
+                'id' => 'listeserie',
+                'label' => 'Découvrir des séries',
+                'link'  => $url('listeseries'),
+            ];
+            $items[] = [
+                        'id' => 'stat',
+                        'label' => 'Statistiques',
+                        'link'  => $url('stats')
+            ];
             $items[] = [
                 'id' => 'logout',
                 'label' => $username,

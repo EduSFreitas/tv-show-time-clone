@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 25 avr. 2018 à 04:24
+-- Généré le :  jeu. 26 avr. 2018 à 23:57
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -94,9 +94,14 @@ CREATE TABLE IF NOT EXISTS `utilisateurepisodeserie` (
 --
 
 INSERT INTO `utilisateurepisodeserie` (`idUtilisateur`, `idSerie`, `idSaison`, `idEpisode`, `note`) VALUES
-(1, 'the-100', 3, 5, 0),
-(1, 'the-100', 1, 3, 0),
-(1, 'sherlock', 2, 1, 0);
+(1, 'stranger-things', 1, 1, 0),
+(1, 'the-walking-dead', 1, 1, 0),
+(1, 'game-of-thrones', 1, 1, 0),
+(1, 'game-of-thrones', 1, 4, 0),
+(1, 'the-walking-dead', 1, 2, 0),
+(1, 'game-of-thrones', 1, 2, 0),
+(1, 'game-of-thrones', 1, 3, 0),
+(1, 'stranger-things', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -114,24 +119,24 @@ CREATE TABLE IF NOT EXISTS `utilisateurserie` (
   `note` int(11) DEFAULT NULL,
   `favoris` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateurserie`
 --
 
 INSERT INTO `utilisateurserie` (`id`, `idUtilisateur`, `idSerie`, `episodesRestants`, `episodesVus`, `note`, `favoris`) VALUES
-(2, 1, 'game-of-thrones', NULL, 66, NULL, 1),
+(2, 1, 'game-of-thrones', NULL, 4, NULL, 1),
 (15, 1, 'doctor-who-2005', NULL, 0, NULL, 0),
-(5, 1, 'the-100', NULL, 21, NULL, 1),
 (10, 1, 'friends', NULL, 0, NULL, 0),
-(14, 1, 'the-walking-dead', NULL, 30, NULL, 1),
+(14, 1, 'the-walking-dead', NULL, 2, NULL, 1),
 (12, 2, 'friends', NULL, 0, NULL, 0),
 (13, 1, 'breaking-bad', NULL, 0, NULL, 0),
-(20, 1, 'stranger-things', NULL, 7, NULL, 1),
-(19, 1, 'sherlock', NULL, 1, NULL, 0),
+(20, 1, 'stranger-things', NULL, 2, NULL, 1),
+(19, 1, 'sherlock', NULL, 0, NULL, 0),
 (24, 1, 'how-i-met-your-mother', NULL, 0, NULL, 0),
-(27, 1, 'lost-2004', NULL, 0, NULL, 0);
+(27, 1, 'lost-2004', NULL, 0, NULL, 0),
+(29, 1, 'orphan-black', NULL, 0, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

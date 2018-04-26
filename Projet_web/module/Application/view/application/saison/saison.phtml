@@ -1,20 +1,27 @@
-Série <?=$idSerie?> - Saison <?=$idSaison?>
-<br><a href="<?= $this->basePath()?>/serie/<?=$idSerie?>">Retour page série</a><br>
-<h1>Liste des épisodes</h1>
+<h1 style="text-align : center">Série <?=$idSerie?> - Saison <?=$idSaison?></h1>
 <body >
-    <?php 
-	$lengthObject = count($episode); 
-	for($i=0; $i<$lengthObject; $i++): ?>
-		<?php if($tab[$i+1] == false) :?> <input type="checkbox" name="episode[]" value="<?=$i?>">
-		<?php endif; ?> 
-		<?php if($tab[$i+1] == true) :?> <input type="checkbox" name="episode[]" value="<?=$i?>" checked >
-		<?php endif; ?> 
-		<?= $episode[$i]->number?> - 
-	   	<?= $episode[$i]->title?><br>
-	  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/check/<?=$i+1?>" style="display: none;" id="urlCheck<?=$i?>"></a>
-	  	
-	  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/uncheck/<?=$i+1 ?>" style="display: none;" id="unCheck<?=$i?>"></a>
-	<?php endfor ?>
+	<div class="row" style="padding-top: 20px;" ">
+		<img src="<?= $image->Poster?>" alt="Poster" style ="float:left">
+		<div class="col-lg-5 col-sm-4" style="padding-left: 35px;">
+		    <?php $lengthObject = count($episode); 
+			for($i=0; $i<$lengthObject; $i++): ?>
+
+				<label class="containerRadio">
+				<?= $episode[$i]->number?> - 
+			   	<?= $episode[$i]->title?><br>
+				<?php if($tab[$i+1] == false) :?> <input type="checkbox" name="episode[]" value="<?=$i?>">
+		  		<span class="checkmark"></span>
+				<?php endif; ?> 
+				<?php if($tab[$i+1] == true) :?> <input type="checkbox" name="episode[]" value="<?=$i?>" checked >
+		  		<span class="checkmark"></span>
+				<?php endif; ?> 
+				</label>
+			  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/check/<?=$i+1?>" style="display: none;" id="urlCheck<?=$i?>"></a>
+			  	
+			  	<a href="<?= $this->basePath()?>/serie/<?= $this->idSerie?>/saison/<?= $idSaison?>/uncheck/<?=$i+1 ?>" style="display: none;" id="unCheck<?=$i?>"></a>
+			<?php endfor ?>
+		</div>
+	</div>
 
 	
 </body>

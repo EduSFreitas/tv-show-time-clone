@@ -1,13 +1,14 @@
-<h2>Page Stats user</h2>
+<h1 class="titre"> Statistiques</h2>
 
 <hr>
-
-<img class="avatar" src="<?= $this->user->_picture?>"/><br>
-
-<span><strong>Nom d'utilisateur : </strong> <?= $this->user->_username?></span><br>
-
-<hr>
-
-<span><strong>Nombre de séries suivies: </strong><?=$nbSeries?></span></br>
-
-<span><strong>Nombre d'épisodes vus: </strong><?=$nbEpisodes?></span></br>
+<div class="row">
+	<img class="avatar" src="<?= $this->user->_picture?>" style="float:left;"/><br>
+	<div class="col-lg-4 col-sm-4" style="padding-left: 35px; padding-top: 50px">
+		<div class="row">
+			<span><strong>Nom d'utilisateur : </strong> <?= $this->user->_username?></span><br>
+			<hr>
+			<span><strong>Nombre de séries suivies: </strong><?=$nbSeries?></span></br>
+			<span><strong>Nombre d'épisodes vus: </strong><?=$nbEpisodes?></span></br>
+		</div>
+	</div>
+</div>

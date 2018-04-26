@@ -60,6 +60,7 @@ return [
                     'defaults' => [
                         'controller'    => Controller\ListeSeriesController::class,
                         'action'        => 'listeseries',
+                        'page'          => '1',
                     ],
                 ],
             ],

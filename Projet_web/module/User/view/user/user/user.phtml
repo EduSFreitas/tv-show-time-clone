@@ -1,38 +1,77 @@
-<h2>Page User</h2>
+<h1 class="titre" >Votre profil</h1>
 
 <hr>
-
-<a href="<?= $this->basePath()?>/listeseries/1">Découvrir des séries</a></br>
-
-<a href="<?= $this->basePath()?>/user/administration">Administration du compte</a></br>
-<a href="<?= $this->basePath()?>/user/stats">Stats utilisateurs</a></br><hr>
-
-<img class="avatar" src="<?= $this->user->_picture?>"/><br>
-
-<span><strong>Id utilisateur : </strong> <?= $this->user->_id?></span><br>
-<span><strong>Nom d'utilisateur : </strong> <?= $this->user->_username?></span><br>
-<span><strong>Mail d'utilisateur : </strong> <?= $this->user->_mail?></span><br>
-
+<div class="row">
+	<img class="avatar" src="<?= $this->user->_picture?>" style="float:left;"/><br>
+	<div class="col-lg-4 col-sm-4" style="padding-left: 35px; padding-top: 60px">
+        <div class="row">
+			<span><strong>Nom d'utilisateur : </strong> <?= $this->user->_username?></span><br>
+			<span><strong>Mail d'utilisateur : </strong> <?= $this->user->_mail?></span><br>
+		</div>
+	</div>
+</div>
 <hr>
 <h3>Séries en cours</h3>
-
-<?php foreach ($seriesEnCours as $serie): ?>
-    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
-<?php endforeach;?>
-
-<hr>
-
+    <div class="row groupeColomnSerie">
+			<?php for ($i=0;$i<sizeof($seriesEnCours);$i++): ?>
+				<div>
+					<a href="<?= $this->basePath()?>/serie/<?= $seriesEnCours[$i]->_idSerie?>">
+						<img src="<?= $imageEnCours[$i]->Poster?>" alt="Poster" id="posterSerie">
+						<div>
+							<?= $seriesEnCours[$i]->_idSerie?>
+						</div>
+					</a>
+				</div>
+				<?php if(($i+1)%4==0): ?>
+					</div>
+						<?php if($i!=sizeof($seriesEnCours)-1){
+							echo '<hr>';
+						} ?>
+					<div class="row groupeColomnSerie">
+				<?php endif ?>
+			<?php endfor;?>
+	</div>
+	<hr>
 
 <h3>Séries à démarrer</h3>
-
-<?php foreach ($seriesADemarrer as $serie): ?>
-    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
-<?php endforeach;?>
-
+    <div class="row groupeColomnSerie">
+			<?php for ($i=0;$i<sizeof($seriesADemarrer);$i++): ?>
+				<div>
+					<a href="<?= $this->basePath()?>/serie/<?= $seriesADemarrer[$i]->_idSerie?>">
+						<img src="<?= $imageADemarrer[$i]->Poster?>" alt="Poster" id="posterSerie">
+						<div>
+							<?= $seriesADemarrer[$i]->_idSerie?>
+						</div>
+					</a>
+				</div>
+				<?php if(($i+1)%4==0): ?>
+					</div>
+						<?php if($i!=sizeof($seriesADemarrer)-1){
+							echo '<hr>';
+						} ?>
+					<div class="row groupeColomnSerie">
+				<?php endif ?>
+			<?php endfor;?>
+	</div>
 <hr>
 
 <h3>Séries favorites</h3>
-<?php foreach ($seriesFavorites as $serie): ?>
-    <a href="<?= $this->basePath()?>/serie/<?= $serie->_idSerie?>"><?= $serie->_idSerie?></a><br>
-<?php endforeach;?>
-
+    <div class="row groupeColomnSerie">
+		<?php for ($i=0;$i<sizeof($seriesFavorites);$i++): ?>
+			<div>
+				<a href="<?= $this->basePath()?>/serie/<?= $seriesFavorites[$i]->_idSerie?>">
+					<img src="<?= $imageFavorites[$i]->Poster?>" alt="Poster" id="posterSerie">
+					<div>
+						<?= $seriesFavorites[$i]->_idSerie?>
+					</div>
+				</a>
+			</div>
+			<?php if(($i+1)%4==0): ?>
+				</div>
+					<?php if($i!=sizeof($seriesFavorites)-1){
+						echo '<hr>';
+					} ?>
+				<div class="row groupeColomnSerie">
+			<?php endif ?>
+		<?php endfor;?>
+	</div>

@@ -59,14 +59,47 @@ class SaisonController extends AbstractActionController
             'Authorization' => 'Bearer [access_token]',
         ));
 
-        //Envoie requete
+        //Prépare requete pour obtenir nom et date de la série 
+        $request2 = new Request();
+        $request2->setMethod(Request::METHOD_GET);
+        $request2->setUri('http://api.trakt.tv/shows/'.$this->_idSerie.'?extended=full');
+        $request2->getHeaders()->addHeaders(array(
+            'Content-Type' => 'application/json',
+            'trakt-api-key' => '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6',
+            'trakt-api-version' => '2',
+            'Authorization' => 'Bearer [access_token]',
+        ));
         $client = new Client();
+
         $api = $client->send($request);
+        $api2 = $client->send($request2);
+        $serie = Json::decode($api2->getBody());
+        $arrayImages = array();
+        // Récupère l'id de la série pour OMDB
+        $idOMDB = $serie->ids->imdb;
+
+        //Prépare requete
+        $requestOMDB = new Request();
+        $requestOMDB->setMethod(Request::METHOD_GET);
+        $requestOMDB->setUri('http://www.omdbapi.com/?i='.$idOMDB.'&apikey=215947ec');
+        $requestOMDB->getHeaders()->addHeaders(array(
+            'Content-Type' => 'application/json',
+            'trakt-api-key' => '7f64fc2ceef5b70439a9736df3b9b9310eddd6c57ecb55743d178bc1300a40c6',
+            'trakt-api-version' => '2',
+            'Authorization' => 'Bearer [access_token]',
+        ));
+
+        //Envoie requete
+       
+        $clientOMDB = new Client();
+        
+        $apiOMDB = $clientOMDB->send($requestOMDB);
 
         //Décode le json vers php
         $episode = Json::decode($api->getBody());
-        $nbEpisode= count($episode) ; 
+        $resultatOMDB = Json::decode($apiOMDB->getBody()); 
 
+        $nbEpisode= count($episode) ;
         $tab = array(); 
 
         for($i=0 ; $i<$nbEpisode+1; $i++){
@@ -83,6 +116,7 @@ class SaisonController extends AbstractActionController
             'idSaison'=>$this->_idSaison,
             'episode'=>$episode,
             'tab'=>$tab,
+            'image'=>$resultatOMDB,
         ]);
     }
 
