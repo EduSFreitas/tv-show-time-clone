@@ -50,9 +50,10 @@ class SaisonController extends AbstractActionController
         //Récupère de la série et de la saison depuis l'url
         $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
         $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
+        // Recupère l'id User 
         $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
 
-        //Prépare requete pour obtenir nom et date de la série 
+        //Prépare requete pour obtenir les informations concernant la saison en fonction de l'id serie et l'id saison. Utilisation de l'API Trakt Tv
         $request = new Request();
         $request->setMethod(Request::METHOD_GET);
         $request->setUri('http://api.trakt.tv/shows/'.$this->_idSerie.'/seasons/'.$this->_idSaison);
@@ -63,7 +64,7 @@ class SaisonController extends AbstractActionController
             'Authorization' => 'Bearer [access_token]',
         ));
 
-        //Prépare requete pour obtenir nom et date de la série 
+        //Prépare requete pour obtenir toutes les informations sur la série en fonction de son id.
         $request2 = new Request();
         $request2->setMethod(Request::METHOD_GET);
         $request2->setUri('http://api.trakt.tv/shows/'.$this->_idSerie.'?extended=full');
@@ -74,15 +75,17 @@ class SaisonController extends AbstractActionController
             'Authorization' => 'Bearer [access_token]',
         ));
         $client = new Client();
-
+        // Envois des requetes 
         $api = $client->send($request);
         $api2 = $client->send($request2);
+        //Décode le json vers php
         $serie = Json::decode($api2->getBody());
         $arrayImages = array();
-        // Récupère l'id de la série pour OMDB
+
+        // Récupère l'imdb de la série afin d'obtenir le poster 
         $idOMDB = $serie->ids->imdb;
 
-        //Prépare requete
+        //Prépare requete afin d'obtenir le poster de la série. 
         $requestOMDB = new Request();
         $requestOMDB->setMethod(Request::METHOD_GET);
         $requestOMDB->setUri('http://www.omdbapi.com/?i='.$idOMDB.'&apikey=215947ec');
@@ -94,18 +97,16 @@ class SaisonController extends AbstractActionController
         ));
 
         //Envoie requete
-       
         $clientOMDB = new Client();
-        
         $apiOMDB = $clientOMDB->send($requestOMDB);
 
         //Décode le json vers php
         $episode = Json::decode($api->getBody());
         $resultatOMDB = Json::decode($apiOMDB->getBody()); 
-
+        // A partir du résultat de la requête, on peut compter le nombre d'épisode dans la série
         $nbEpisode= count($episode) ;
         $tab = array(); 
-
+        // On parcours tous les épisodes et on met a true la valeur de tab si l'épisode se trouve dans la table utilisateurepisodeserie c'est à dire si il a été vus
         for($i=0 ; $i<$nbEpisode+1; $i++){
             $req= $this->_utilisateurEpisodeSerie->select($idUser, $idSerie, $idSaison, $i);
             if($req!=null){
@@ -115,6 +116,8 @@ class SaisonController extends AbstractActionController
                 $tab[$i]=false;
             }
         }
+        
+        // On retourne toutes les valeurs afin de les utiliser dans la vue saison.phtml
         return new ViewModel([
             'idSerie'=>$this->_idSerie,
             'idSaison'=>$this->_idSaison,
@@ -124,21 +127,25 @@ class SaisonController extends AbstractActionController
         ]);
     }
 
+    // Fonction permettant de marquer un épisode comme vus. 
     public function checkAction(){
+        // On récupère l'id user et l'id serie
         $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
         $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
         
+        // On selectionne le nombre d'épisode vus 
         $nbEpisodeVus=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
         $nbEpisodeVusIncrément=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
-
+        // On incrémente de 1 la variable nbepisode vus si l'épisode a été vus 
         $nbEpisodeVusIncrément->_episodesVus =  $nbEpisodeVusIncrément->_episodesVus + 1 ; 
         $nbEpisodeFinal= (array) ($nbEpisodeVusIncrément) ; 
+        // Update de la base de données 
         $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal);
 
-        //Insertion dans la base utilisateur episode serie
+        //On récupère l'id saison et l'id épisode 
         $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
         $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idCheck'); 
-
+        // On créé l'objet avec les nouvelles valeurs 
         $object = new Utilisateurepisodeserie(); 
         $object->_idUtilisateur =$idUser; 
         $object->_idSerie = $idSerie; 
@@ -146,12 +153,13 @@ class SaisonController extends AbstractActionController
         $object->_idEpisode = $idEpisode ; 
         $object->_note = 0 ; 
 
+        // On ajoute l'épisode vus dans la table utilisateurepisodeserie
         $ajouterEpisode = $this->_utilisateurEpisodeSerie->insert($object);
 
         //Gestion des badges
         $this->_utilisateurBadge->testBadges($idUser);
 
-
+         // On retourne toutes les valeurs afin de les utiliser dans la vue saison.phtml
         return $this->redirect()->toRoute('saison', array(
             'action' => 'saison',
             'idSerie' =>$idSerie,
@@ -159,24 +167,28 @@ class SaisonController extends AbstractActionController
         ));
     }
 
+    // Fonction permetant de marquer un épisode comme non vus 
     public function unCheckAction(){
+        // On récupère l'id user et l'id serie
         $idUser=$this->userManager->findByMail($this->authService->getIdentity())->_id;
         $idSerie = $this->_idSerie=$this->params()->fromRoute('idSerie');
         
+        // On selectionne le nombre d'épisode vus 
         $nbEpisodeVus=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
         $nbEpisodeVusIncrément=$this->_utilisateurSerie->findByIdSerieUser($idUser, $idSerie);
-
+        
+        // On décrémente de 1 la variable nbepisode vus si l'épisode a été marqué non vus 
         $nbEpisodeVusIncrément->_episodesVus =  $nbEpisodeVusIncrément->_episodesVus - 1 ; 
         $nbEpisodeFinal= (array) ($nbEpisodeVusIncrément) ; 
         $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal); 
 
-        //Suppression dans la base utilisateur episode serie
+        // On récupère l'id saison et l'id épisode
         $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
         $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idUnCheck'); 
-
+        //Suppression dans la base utilisateur episode serie
         $supprimerEpisode = $this->_utilisateurEpisodeSerie->delete($idUser, $idSerie, $idSaison, $idEpisode);
 
-
+        // On retourne toutes les valeurs afin de les utiliser dans la vue saison.phtml
         return $this->redirect()->toRoute('saison', array(
             'action' => 'saison',
             'idSerie' =>$idSerie,
