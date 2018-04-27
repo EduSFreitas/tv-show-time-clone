@@ -12,6 +12,8 @@ class StatsControllerFactory implements FactoryInterface
     {   $authService = $container->get(\Zend\Authentication\AuthenticationService::class);
         $userManager = $container->get(\User\Services\UserManager::class);
         $utilisateurSerie = $container->get(\User\Services\UtilisateurSerieTable::class);
-        return new StatsController($authService,$userManager,$utilisateurSerie);
+        $utilisateurBadge = $container->get(\User\Services\UtilisateurBadgeTable::class);
+        $badge=$container->get(\User\Services\BadgeTable::class);
+        return new StatsController($authService,$userManager,$utilisateurSerie,$utilisateurBadge,$badge);
     }
 }

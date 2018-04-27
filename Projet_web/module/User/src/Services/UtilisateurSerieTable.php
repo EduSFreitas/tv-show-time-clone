@@ -156,6 +156,30 @@ class UtilisateurSerieTable {
         return $i;
     }
 
+    //Renvoie nb de series suivies
+    public function countById($id){
+        $i=0;
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);
+        //Compte
+        foreach( $resultSet as $r )
+            $i++;
+        return $i;
+    }
+
+
+    public function countEpisodesById($id){
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);
+
+        $i=0;
+
+        //Compte
+        foreach( $resultSet as $r )
+            $i+=$r->_episodesVus;
+        return $i;
+    }
+
     //Renvoie nb d'épisodes vus
     public function countEpisodesbyUserConnected(){
         //Récupère id de l'utilisateur connecté
@@ -172,6 +196,20 @@ class UtilisateurSerieTable {
         return $i;
     }
 
+    public function test10EpisodesSerie($id){
+        //Récupère les objets
+        $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);
+
+        $i=false;
+
+        //test
+        foreach( $resultSet as $r )
+            if($r->_episodesVus>10){
+                $i=true;
+            };
+        return $i;
+
+    }
     //Change la note
     public function noterByUserConnected($note,$idSerie){
         $idUser=$this->getUserConnected();

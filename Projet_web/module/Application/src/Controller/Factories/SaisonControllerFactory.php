@@ -24,6 +24,7 @@ class SaisonControllerFactory implements FactoryInterface
         $userManager = $container->get(\User\Services\UserManager::class);
         $utilisateurSerie = $container->get(\User\Services\UtilisateurSerieTable::class);
         $utilisateurEpisodeSerie = $container->get(\User\Services\UtilisateurEpisodeSerieTable::class);
-        return new SaisonController($authService,$userManager,$utilisateurSerie, $utilisateurEpisodeSerie);
+        $utilisateurBadge = $container->get(\User\Services\UtilisateurBadgeTable::class);
+        return new SaisonController($authService,$userManager,$utilisateurSerie, $utilisateurEpisodeSerie,$utilisateurBadge);
     }
 }

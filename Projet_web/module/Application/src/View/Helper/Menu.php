@@ -125,9 +125,9 @@ class Menu extends AbstractHelper
                 $link = isset($item['link']) ? $item['link'] : '#';
                 $label = isset($item['label']) ? $item['label'] : '';
 
-                $result .= '<li>';
+                $result .= '<li class="menudropdown">';
                 $result .= '<a href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
-                $result .= '</li>';
+                $result .= '</li><br>';
             }
             $result .= '</ul>';
             $result .= '</li>';

@@ -95,6 +95,20 @@ main:after {
     background-color: rgb(255,215,0);
 }
 
+
+
+.menudropdown{
+    text-align: left;
+    width:100%;
+
+}
+
+.menudropdown>a{
+    width:100%;
+    text-align: left;
+
+}
+
 .hidden{
     display:none;
 }
@@ -530,3 +544,4 @@ td{
     text-decoration: none;
     color: #FFFFFF;
 }
+

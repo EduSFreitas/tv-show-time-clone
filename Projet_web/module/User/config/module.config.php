@@ -93,6 +93,12 @@ return [
             Services\UtilisateurSerieTable::class => Services\Factories\UtilisateurSerieTableFactory::class,
             Services\UtilisateurSerieTableGateway::class => Services\Factories\UtilisateurSerieTableGatewayFactory::class,
 
+            Services\BadgeTable::class => Services\Factories\BadgeTableFactory::class,
+            Services\BadgeTableGateway::class => Services\Factories\BadgeTableGatewayFactory::class,
+
+            Services\UtilisateurBadgeTable::class => Services\Factories\UtilisateurBadgeTableFactory::class,
+            Services\UtilisateurBadgeTableGateway::class => Services\Factories\UtilisateurBadgeTableGatewayFactory::class,
+
             Services\UtilisateurEpisodeSerieTable::class => Services\Factories\UtilisateurEpisodeSerieTableFactory::class,
             Services\UtilisateurEpisodeSerieTableGateway::class => Services\Factories\UtilisateurEpisodeSerieTableGatewayFactory::class,
 

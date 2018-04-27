@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 26 avr. 2018 à 23:57
--- Version du serveur :  5.7.21
--- Version de PHP :  5.6.35
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 27, 2018 at 10:47 PM
+-- Server version: 5.7.19
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,28 +19,37 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `tv_show_time`
+-- Database: `tv_show_time`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `badge`
+-- Table structure for table `badge`
 --
 
 DROP TABLE IF EXISTS `badge`;
 CREATE TABLE IF NOT EXISTS `badge` (
   `idBadge` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) NOT NULL,
-  `photo` varchar(100) NOT NULL,
+  `photo` varchar(100) DEFAULT NULL,
   `description` varchar(200) NOT NULL,
   PRIMARY KEY (`idBadge`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `badge`
+--
+
+INSERT INTO `badge` (`idBadge`, `nom`, `photo`, `description`) VALUES
+(1, 'Spectateur', '', 'A regardé 10 épisodes d\'une série'),
+(3, 'Gourmet', NULL, 'Suit 5 séries'),
+(4, 'Fan', NULL, 'A regardé au total 50 épisodes');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -55,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `mail`, `password`, `salt`, `picture`) VALUES
@@ -65,7 +74,7 @@ INSERT INTO `user` (`id`, `username`, `mail`, `password`, `salt`, `picture`) VAL
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurbadge`
+-- Table structure for table `utilisateurbadge`
 --
 
 DROP TABLE IF EXISTS `utilisateurbadge`;
@@ -74,10 +83,17 @@ CREATE TABLE IF NOT EXISTS `utilisateurbadge` (
   `idBadge` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `utilisateurbadge`
+--
+
+INSERT INTO `utilisateurbadge` (`idUtilisateur`, `idBadge`) VALUES
+(1, 3);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurepisodeserie`
+-- Table structure for table `utilisateurepisodeserie`
 --
 
 DROP TABLE IF EXISTS `utilisateurepisodeserie`;
@@ -90,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurepisodeserie` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `utilisateurepisodeserie`
+-- Dumping data for table `utilisateurepisodeserie`
 --
 
 INSERT INTO `utilisateurepisodeserie` (`idUtilisateur`, `idSerie`, `idSaison`, `idEpisode`, `note`) VALUES
@@ -101,12 +117,27 @@ INSERT INTO `utilisateurepisodeserie` (`idUtilisateur`, `idSerie`, `idSaison`, `
 (1, 'the-walking-dead', 1, 2, 0),
 (1, 'game-of-thrones', 1, 2, 0),
 (1, 'game-of-thrones', 1, 3, 0),
-(1, 'stranger-things', 1, 2, 0);
+(1, 'stranger-things', 1, 2, 0),
+(1, 'orphan-black', 1, 1, 0),
+(1, 'orphan-black', 1, 2, 0),
+(1, 'stranger-things', 1, 2, 0),
+(1, 'orphan-black', 1, 3, 0),
+(1, 'orphan-black', 1, 4, 0),
+(1, 'orphan-black', 1, 5, 0),
+(1, 'stranger-things', 1, 2, 0),
+(1, 'stranger-things', 1, 3, 0),
+(1, 'stranger-things', 1, 4, 0),
+(1, 'stranger-things', 1, 5, 0),
+(1, 'stranger-things', 1, 6, 0),
+(1, 'game-of-thrones', 1, 5, 0),
+(1, 'game-of-thrones', 1, 6, 0),
+(1, 'game-of-thrones', 1, 7, 0),
+(1, 'game-of-thrones', 1, 8, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurserie`
+-- Table structure for table `utilisateurserie`
 --
 
 DROP TABLE IF EXISTS `utilisateurserie`;
@@ -122,21 +153,19 @@ CREATE TABLE IF NOT EXISTS `utilisateurserie` (
 ) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `utilisateurserie`
+-- Dumping data for table `utilisateurserie`
 --
 
 INSERT INTO `utilisateurserie` (`id`, `idUtilisateur`, `idSerie`, `episodesRestants`, `episodesVus`, `note`, `favoris`) VALUES
-(2, 1, 'game-of-thrones', NULL, 4, NULL, 1),
+(2, 1, 'game-of-thrones', NULL, 8, NULL, 1),
 (15, 1, 'doctor-who-2005', NULL, 0, NULL, 0),
-(10, 1, 'friends', NULL, 0, NULL, 0),
-(14, 1, 'the-walking-dead', NULL, 2, NULL, 1),
 (12, 2, 'friends', NULL, 0, NULL, 0),
 (13, 1, 'breaking-bad', NULL, 0, NULL, 0),
-(20, 1, 'stranger-things', NULL, 2, NULL, 1),
+(20, 1, 'stranger-things', NULL, 8, 5, 0),
 (19, 1, 'sherlock', NULL, 0, NULL, 0),
 (24, 1, 'how-i-met-your-mother', NULL, 0, NULL, 0),
 (27, 1, 'lost-2004', NULL, 0, NULL, 0),
-(29, 1, 'orphan-black', NULL, 0, NULL, 0);
+(29, 1, 'orphan-black', NULL, 5, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -7,6 +7,7 @@
 
 namespace Application\Controller;
 
+use User\Services\UtilisateurBadgeTable;
 use Zend\Json\Json;
 use Zend\Http\Client;
 use Zend\Http\Request;
@@ -15,7 +16,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use User\Services\UserManager;
 use User\Services\UtilisateurSerieTable;
-use User\Models\Utilisateurserie; 
+use User\Models\Utilisateurserie;
+use User\Models\Utilisateurbadge;
 use User\Services\UtilisateurEpisodeSerieTable;
 use User\Models\Utilisateurepisodeserie; 
 
@@ -30,14 +32,16 @@ class SaisonController extends AbstractActionController
     private $authService;
     private $userManager;
     private $_utilisateurSerie;
-    private $_utilisateurEpisodeSerie; 
+    private $_utilisateurBadge;
+    private $_utilisateurEpisodeSerie;
     
 
-    public function __construct($authService,UserManager $userManager,UtilisateurSerieTable $utilisateurSerie,UtilisateurEpisodeSerieTable $utilisateurEpisodeSerie)
+    public function __construct($authService,UserManager $userManager,UtilisateurSerieTable $utilisateurSerie,UtilisateurEpisodeSerieTable $utilisateurEpisodeSerie,UtilisateurBadgeTable $utilisateurBadge)
     {
         $this->authService = $authService;
         $this->userManager = $userManager;
         $this->_utilisateurSerie = $utilisateurSerie;
+        $this->_utilisateurBadge = $utilisateurBadge;
         $this->_utilisateurEpisodeSerie = $utilisateurEpisodeSerie;
     }
 
@@ -143,6 +147,10 @@ class SaisonController extends AbstractActionController
         $object->_note = 0 ; 
 
         $ajouterEpisode = $this->_utilisateurEpisodeSerie->insert($object);
+
+        //Gestion des badges
+        $this->_utilisateurBadge->testBadges($idUser);
+
 
         return $this->redirect()->toRoute('saison', array(
             'action' => 'saison',
