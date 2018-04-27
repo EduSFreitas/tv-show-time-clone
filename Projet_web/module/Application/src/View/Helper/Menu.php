@@ -33,6 +33,14 @@ class Menu extends AbstractHelper
      * Sets menu items.
      * @param array $items Menu items.
      */
+
+    public function setActiveItemId($activeItemId)
+    {
+        $this->activeItemId = $activeItemId;
+    }
+
+
+
     public function setItems($items)
     {
         $this->items = $items;
@@ -47,6 +55,7 @@ class Menu extends AbstractHelper
         if (count($this->items)==0)
             return ''; // Do nothing if there are no items.
 
+
         $result = '<nav role="navigation">';
         $result .= '<div class="navbar-header">';
         $result .= '<button type="button" class="navbar-toggle" data-toggle="collapse"';
@@ -59,22 +68,24 @@ class Menu extends AbstractHelper
         $result .= '</div>';
 
         $result .= '<div class="collapse navbar-collapse navbar-ex1-collapse">';
-        $result .= '<ul class="nav navbar-nav">';
+        $result .= '<ul class="nav navbar-nav navigation">';
+
+        $i=0;
 
         // Render items
         foreach ($this->items as $item) {
-            if(!isset($item['float']) || $item['float']=='left')
-                $result .= $this->renderItem($item);
+            if(!isset($item['float']) || $item['float']=='left'){
+                $i++;
+                $result .= $this->renderItem($item,$i);
+            }
         }
 
+
+        $result .= '<div id="line-top" class="sliding-line"></div>';
+        $result .= '<div id="line-bottom" class="sliding-line"></div>';
         $result .= '</ul>';
-        $result .= '<ul class="nav navbar-nav navbar-right">';
+        $result .= '<ul class="nav navbar-nav navbar-right navigation">';
 
-        // Render items
-        foreach ($this->items as $item) {
-            if(isset($item['float']) && $item['float']=='right')
-                $result .= $this->renderItem($item);
-        }
 
         $result .= '</ul>';
         $result .= '</div>';
@@ -89,10 +100,12 @@ class Menu extends AbstractHelper
      * @param array $item The menu item info.
      * @return string HTML code of the item.
      */
-    protected function renderItem($item)
+    protected function renderItem($item,$i)
     {
         $id = isset($item['id']) ? $item['id'] : '';
         $label = isset($item['label']) ? $item['label'] : '';
+        $isActive = ($id==$this->activeItemId);
+
 
         $result = '';
 
@@ -102,7 +115,7 @@ class Menu extends AbstractHelper
 
             $dropdownItems = $item['dropdown'];
 
-            $result .= '<li class="dropdown">';
+            $result .= '<li class="dropdown menu'.$i.'">';
             $result .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
             $result .= $escapeHtml($label) . ' <b class="caret"></b>';
             $result .= '</a>';
@@ -122,7 +135,12 @@ class Menu extends AbstractHelper
         } else {
             $link = isset($item['link']) ? $item['link'] : '#';
 
-            $result .= '<li>';
+            if($isActive){
+                $result .= '<li class="dropdown menu active'.$i.'">';
+            }else{
+                $result .= '<li class="dropdown menu'.$i.'">';
+            }
+
             $result .= '<a href="'.$escapeHtml($link).'">'.$escapeHtml($label).'</a>';
             $result .= '</li>';
         }

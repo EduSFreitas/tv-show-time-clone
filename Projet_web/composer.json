@@ -25,7 +25,8 @@
         "zendframework/zend-log": "^2.9",
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-uri": "^2.5",
-        "zendframework/zend-paginator": "^2.8"
+        "zendframework/zend-paginator": "^2.8",
+        "zendframework/zend-navigation": "^2.9"
     },
     "autoload": {
         "psr-4": {

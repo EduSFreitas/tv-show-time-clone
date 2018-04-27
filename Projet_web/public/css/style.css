@@ -9,16 +9,23 @@ body {
     position: relative;
     margin: 0 auto;
     width: 300px;
+    color: black;
 }
 
 .search input {
-    height: 26px;
+    height: 60px;
     width: 100%;
-    padding: 0 12px 0 25px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #a8acbc #babdcc #c0c3d2;
-    border-radius: 13px;
+    min-width: 100%;
+    padding: 0;
+    border-radius: 0;
+    line-height: 20px;
+    background-color: transparent;
+    color: #999999;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-bottom: 3px solid rgba(255,215,0,0.7);
+
 }
 
 .search input:focus {
@@ -27,18 +34,21 @@ body {
 }
 
 
+
+
+
+
 .search #results {
     position: absolute;
-    top: 35px;
+    top: 55px;
     left: 0;
     right: 0;
     padding: 0;
     margin: 0;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #cbcfe2 #c8cee7 #c4c7d7;
+    border-bottom: 1px solid rgb(255,215,0);
     border-radius: 3px;
-    background-color: #fdfdfd;
+    background-color: #333333;
+    list-style: none;
 }
 
 
@@ -48,9 +58,8 @@ body {
     z-index: 999;
     margin: 0 -1px;
     padding: 6px 40px 6px 10px;
-    color: #808394;
     font-weight: 500;
-    text-shadow: 0 1px #fff;
+    color: #999999;
     border: 1px solid transparent;
     border-radius: 3px;
 }
@@ -69,10 +78,10 @@ body {
 
 .search #results a:hover {
     text-decoration: none;
-    color: #fff;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-    border-color: #2380dd #2179d5 #1a60aa;
-    background-color: #338cdf;
+    color: #333333;
+    -webkit-transform: scale(1.025);
+    transform: scale(1.025);
+    background-color: rgb(255,215,0);
 }
 
 .hidden{
@@ -148,7 +157,9 @@ div.container a.navbar-brand > img {
 #header {
     height: 10vh;
     border-bottom: solid black 1px;
-    background-color: #fcd738;
+    background-color: #333333;
+    color: #fcd738;
+    border-bottom: solid 3px #fcd738;
 
 }
 
@@ -175,17 +186,22 @@ td{
 
 #footer {
     height: 10vh;
-    border-bottom: solid black 1px;
-    background-color: #fcd738;
-
-}
-
-footer div p {
-    color:black;
-    text-align: center;
+    background-color: #333333;
+    color: #999999;
+    border-top: solid 3px #fcd738;
+    display: flex;
+    justify-content: center;
     align-items: center;
 
 }
+
+#footer div p {
+    color: #fcd738;
+    text-align: center;
+}
+
+
+
 
 
 /*Login*/
@@ -390,7 +406,7 @@ footer div p {
 }
 /* User mse en page sére */
 #posterSerie {
-    max-height: 200px; 
+    height: 200px;
 }
 
 .groupeColomnSerie {
@@ -406,4 +422,50 @@ footer div p {
 .groupeColomnSerie a:hover {
     text-decoration: none;
     color: #FFD700;
+}
+
+
+
+/* ------------ Menu ---------- */
+.navbar-nav{
+    width:100%;
+}
+
+.navbar-right{
+    margin-right: 0;
+}
+
+
+.navigation li{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    float: left;
+    display: inline-block;
+    padding: 0 0 10px 0;
+    text-transform: uppercase;
+    text-align: center;
+    width:25%;
+}
+
+.navigation li a{
+    color: #333333;
+}
+
+
+.navigation li a {
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform,background-color;
+    transition-property: box-shadow, transform,background-color;
+}
+.navigation li a:hover, .navigation li a:focus, .navigation li a:active , .active{
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    background-color:#FFD700;
 }

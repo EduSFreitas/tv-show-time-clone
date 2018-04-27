@@ -36,6 +36,7 @@
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-authentication" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-math" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-paginator" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-navigation" />
     </include_path>
   </component>
 </project>

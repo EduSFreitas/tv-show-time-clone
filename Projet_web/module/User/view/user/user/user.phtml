@@ -1,5 +1,4 @@
 <h1 class="titre" >Votre profil</h1>
-
 <hr>
 <div class="row">
 	<img class="avatar" src="<?= $this->user->_picture?>" style="float:left;"/><br>
@@ -18,7 +17,7 @@
 					<a href="<?= $this->basePath()?>/serie/<?= $seriesEnCours[$i]->_idSerie?>">
 						<img src="<?= $imageEnCours[$i]->Poster?>" alt="Poster" id="posterSerie">
 						<div>
-							<?= $seriesEnCours[$i]->_idSerie?>
+							<?= $imageEnCours[$i]->Title?>
 						</div>
 					</a>
 				</div>
@@ -40,7 +39,7 @@
 					<a href="<?= $this->basePath()?>/serie/<?= $seriesADemarrer[$i]->_idSerie?>">
 						<img src="<?= $imageADemarrer[$i]->Poster?>" alt="Poster" id="posterSerie">
 						<div>
-							<?= $seriesADemarrer[$i]->_idSerie?>
+							<?= $imageADemarrer[$i]->Title?>
 						</div>
 					</a>
 				</div>
@@ -62,7 +61,7 @@
 				<a href="<?= $this->basePath()?>/serie/<?= $seriesFavorites[$i]->_idSerie?>">
 					<img src="<?= $imageFavorites[$i]->Poster?>" alt="Poster" id="posterSerie">
 					<div>
-						<?= $seriesFavorites[$i]->_idSerie?>
+						<?= $imageFavorites[$i]->Title?>
 					</div>
 				</a>
 			</div>
