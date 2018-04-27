@@ -379,7 +379,7 @@ td{
 
 /* Listeseries */
 #poster {
-    max-height: 400px;
+    height: 400px;
 }
 
 .groupeColomn {
@@ -468,4 +468,54 @@ td{
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     background-color:#FFD700;
+}
+
+
+/* Boutons du site */
+.button-yellow {
+    text-align: center;
+    font-weight:bold;
+    border-radius: 5px;
+    color: #333333;
+    font-size: 15px;
+    background: #FFD740;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.button-yellow:hover {
+    background: #FFD740;
+    background-image: -webkit-linear-gradient(top, #FFD740, #e6bb3c);
+    background-image: -moz-linear-gradient(top, #FFD740, #e6bb3c);
+    background-image: -ms-linear-gradient(top, #FFD740, #e6bb3c);
+    background-image: -o-linear-gradient(top, #FFD740, #e6bb3c);
+    background-image: linear-gradient(to bottom, #FFD740, #e6bb3c);
+    text-decoration: none;
+}
+
+
+.button-black{
+    text-align: center;
+    background: #444444;
+    background-image: -webkit-linear-gradient(top, #444444, #222222);
+    background-image: -moz-linear-gradient(top, #444444, #222222);
+    background-image: -ms-linear-gradient(top, #444444, #222222);
+    background-image: -o-linear-gradient(top, #444444, #222222);
+    background-image: linear-gradient(to bottom, #444444, #222222);
+    border-radius: 5px;
+    color: #DDDDDD;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.button-black:hover {
+    background: #444444;
+    background-image: -webkit-linear-gradient(top, #444444, #222222);
+    background-image: -moz-linear-gradient(top, #444444, #222222);
+    background-image: -ms-linear-gradient(top, #444444, #222222);
+    background-image: -o-linear-gradient(top, #444444, #222222);
+    background-image: linear-gradient(to bottom, #444444, #222222);
+    text-decoration: none;
+    color: #FFFFFF;
 }

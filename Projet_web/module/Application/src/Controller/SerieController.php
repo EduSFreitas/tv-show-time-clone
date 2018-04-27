@@ -127,7 +127,10 @@ class SerieController extends AbstractActionController
         $object->_favoris=0;
         $ajouterListe = $this->_utilisateurSerie->insertSerie($object); 
         echo "<script type='text/javascript'>alert('Votre série à bien été ajouté à votre liste');</script>";
-        return $this->redirect()->toRoute('user');      
+        return $this->redirect()->toRoute('serie', array(
+            'action' =>  'serie',
+            'idSerie' =>$idSerie,
+        ));
     }
 
     public function suppressionSerieAction(){
@@ -138,7 +141,11 @@ class SerieController extends AbstractActionController
         // Supprimer la série de ma liste
         $supprimerListe = $this->_utilisateurSerie->delete($idUser, $idSerie);  
         echo "<script type='text/javascript'>alert('Votre série à bien été supprimé de votre liste');</script>";
-        return $this->redirect()->toRoute('user');      
+
+        return $this->redirect()->toRoute('serie', array(
+            'action' =>  'serie',
+            'idSerie' =>$idSerie,
+        ));
     }
 
     public function ajoutFavorisAction(){
@@ -153,7 +160,11 @@ class SerieController extends AbstractActionController
         $resultUpdateA = (array) $resultUpdate ;
         $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
         echo "<script type='text/javascript'>alert('Votre série est maintenant dans vos favoris');</script>";
-        return $this->redirect()->toRoute('user');
+
+        return $this->redirect()->toRoute('serie', array(
+            'action' =>  'serie',
+            'idSerie' =>$idSerie,
+        ));
     }
 
     public function supprimerFavorisAction(){
@@ -168,7 +179,11 @@ class SerieController extends AbstractActionController
         $resultUpdateA = (array) $resultUpdate ;
         $updateRes = $this->_utilisateurSerie->UpdateStatutSerie($resultSet, $resultUpdateA); 
         echo "<script type='text/javascript'>alert('Votre série ne fait plus partie de vos favoris');</script>";
-        return $this->redirect()->toRoute('user');
+
+        return $this->redirect()->toRoute('serie', array(
+            'action' =>  'serie',
+            'idSerie' =>$idSerie,
+        ));
     }
 
 
@@ -179,8 +194,10 @@ class SerieController extends AbstractActionController
 
         $this->_utilisateurSerie->noterByUserConnected($note,$idSerie);
 
-        return $this->redirect()->toRoute('user');
-
+        return $this->redirect()->toRoute('serie', array(
+            'action' =>  'serie',
+            'idSerie' =>$idSerie,
+        ));
 
     }
 }

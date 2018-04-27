@@ -32,7 +32,7 @@
         </div>
         <br>
         <!-- Quand on hover une étoile, met à jour l'affichage avec note(idHover). Quand on sort de la div, remet l'affichage avec note(notePHP)-->
-        <div class="notes" onmouseleave="note(<?=isset($liste->_note)?>)">
+        <div class="notes" onmouseleave="note(<?=isset($liste->_note)?$liste->_note:0;?>)">
             <strong>Note : </strong>
             <a id="star1" onmouseover="note(1)" href="<?= $this->basePath().'/serie/'.$idSerie?>/note/1"><div class="fa fa-star"></div></a>
             <a id="star2" onmouseover="note(2)" href="<?= $this->basePath().'/serie/'.$idSerie?>/note/2"><div class="fa fa-star"></div></a>
@@ -43,18 +43,18 @@
     </div>
     <div class="col-lg-3" style="margin-top: 5%;">
         <?php if(isset($liste)==null): ?>
-           <a class="btn btn-success col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a>
+           <a class="button-yellow col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/ajout">Ajouter à ma liste</a>
            <br>
         <?php else : ?>
-            <a class="btn btn-danger col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/suppression">Supprimer de ma liste</a>
+            <a class="button-black col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/suppression">Supprimer de ma liste</a>
             <br>
         <?php endif; ?>
         <?php if((isset($infoSerie->_favoris)==null || 0) && $liste!=null ): ?>
-            <a class="btn btn-success col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/favoris">Ajouter à mes favoris</a>
+            <a class="button-yellow col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/favoris">Ajouter à mes favoris</a>
             <br>
         <?php endif; ?>
         <?php if(isset($infoSerie->_favoris)==1): ?>
-            <a class="btn btn-danger col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/supprfavoris">Supprimer de mes favoris</a>
+            <a class="button-black col-lg-12" style="margin: 1%;" href="<?= $this->basePath()?>/serie/<?=$idSerie;?>/supprfavoris">Supprimer de mes favoris</a>
             <br>
         <?php endif; ?>
     </div>

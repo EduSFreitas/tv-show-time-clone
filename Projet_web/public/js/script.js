@@ -76,7 +76,7 @@ function note(note){
     if(note<4){star4.classList.remove("checked")}
     if(note<3){star3.classList.remove("checked")}
     if(note<2){star2.classList.remove("checked")}
-    if(note<1){star2.classList.remove("checked")}
+    if(note<1){star1.classList.remove("checked")}
 
 }
 
