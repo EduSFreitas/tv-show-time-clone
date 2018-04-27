@@ -31,10 +31,10 @@
 		var isChecked = event.target.checked;
 		if (!isChecked) {
 			window.location=document.getElementById('unCheck'+event.target.value);
-			alert("Vous avez marqué l'épisode comme étant non vus");
-		} else { 
+			// alert("Vous avez marqué l'épisode comme étant non vu");
+		} else {
 			window.location=document.getElementById('urlCheck'+event.target.value);
-			alert("Vous avez marqué l'épisode comme vus");
+			// alert("Vous avez marqué l'épisode comme vu");
 		}
 	}
 	//initalisation

@@ -129,7 +129,8 @@ class SaisonController extends AbstractActionController
 
         $nbEpisodeVusIncrément->_episodesVus =  $nbEpisodeVusIncrément->_episodesVus + 1 ; 
         $nbEpisodeFinal= (array) ($nbEpisodeVusIncrément) ; 
-        $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal); 
+        $nbEpisodeVusUpdate = $this->_utilisateurSerie->UpdateNbEpisode($nbEpisodeVus, $nbEpisodeFinal);
+
         //Insertion dans la base utilisateur episode serie
         $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
         $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idCheck'); 
@@ -141,9 +142,13 @@ class SaisonController extends AbstractActionController
         $object->_idEpisode = $idEpisode ; 
         $object->_note = 0 ; 
 
-        $ajouterEpisode = $this->_utilisateurEpisodeSerie->insert($object); 
+        $ajouterEpisode = $this->_utilisateurEpisodeSerie->insert($object);
 
-        return $this->redirect()->toRoute('user');
+        return $this->redirect()->toRoute('saison', array(
+            'action' => 'saison',
+            'idSerie' =>$idSerie,
+            'idSaison'=>$idSaison,
+        ));
     }
 
     public function unCheckAction(){
@@ -161,8 +166,13 @@ class SaisonController extends AbstractActionController
         $idSaison = $this->_idSaison=$this->params()->fromRoute('idSaison');
         $idEpisode = $this->_idEpisode=$this->params()->fromRoute('idUnCheck'); 
 
-        $supprimerEpisode = $this->_utilisateurEpisodeSerie->delete($idUser, $idSerie, $idSaison, $idEpisode); 
+        $supprimerEpisode = $this->_utilisateurEpisodeSerie->delete($idUser, $idSerie, $idSaison, $idEpisode);
 
-        return $this->redirect()->toRoute('user');
+
+        return $this->redirect()->toRoute('saison', array(
+            'action' => 'saison',
+            'idSerie' =>$idSerie,
+            'idSaison'=>$idSaison,
+        ));
     }
 }
