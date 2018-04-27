@@ -16,7 +16,6 @@ use Zend\View\Model\ViewModel;
 
 class ListeSeriesController extends AbstractActionController
 {
-
     private $_idPage;
     private $_idRecherche;
 
@@ -84,15 +83,16 @@ class ListeSeriesController extends AbstractActionController
 
             //Décope le json vers php
             $resultatOMDB = Json::decode($apiOMDB->getBody());
+            //Stock dans un array
             $arrayImages[$i] = $resultatOMDB;
         }
         
         return new ViewModel([
             'recherche'=>$this->_idRecherche,
-            'resultat'=>$resultat,
-            'imageOMDB' => $arrayImages,
+            'resultat'=>$resultat, // Resultat de la premiere requete (de l'API trakt)
+            'imageOMDB' => $arrayImages, // Resultat de la deuxieme requete (de l'API OMDB)
             'numPage' =>$this->_idPage,
-            'nbPages' => $nbPages
+            'nbPages' => $nbPages // Nombre total de pages que la requete 1 renvoie
         ]);
     }
 }

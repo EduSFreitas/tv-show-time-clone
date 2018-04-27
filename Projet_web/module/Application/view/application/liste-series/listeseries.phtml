@@ -2,7 +2,8 @@
 	<h1 class="titre">Découvrez des Series</h1>
     <div id="result">
     	<div class="row groupeColomn">
-			<?php for($i=0; $i<sizeof($resultat);$i++): ?>
+			<?php // Pour chaque serie reçut par la requete on affiche son poster et son nom en lien clicable
+			for($i=0; $i<sizeof($resultat);$i++): ?>
 				<div>
 					<a href="<?= $this->basePath()?>/serie/<?= $resultat[$i]->show->ids->slug?>">
 						<img src="<?= $imageOMDB[$i]->Poster?>" alt="Poster" id="poster">
@@ -11,7 +12,7 @@
 						</div>
 				    </a>
 				</div>
-				<?php if(($i+1)%2==0): ?>
+				<?php if(($i+1)%2==0): /* On les affiches par lignes de 2 series */?>
 					</div>
 					<?php if($i!=sizeof($resultat)-1){
 						echo '<hr>';
