@@ -11,7 +11,7 @@
                 <form action="<?=$this->basePath()?>/user/administration/changerMail" method="post">
                     <label class=""><label for="nom">Changer email</label> : </label>
                     <div class="row">
-                        <input type="email" class="form-control" name="mail"/>
+                        <input type="email" class="form-control" name="mail" placeholder="Nouvel e-mail"/>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Envoyer</button>
                     </div>
                 </form>
@@ -20,12 +20,11 @@
                 <form action="<?=$this->basePath()?>/user/administration/changerPhoto" method="post">
                     <label class=""><label for="nom">Changer photo de profil</label> : </label>
                     <div class="row">           
-                        <input type="url" class="form-control" name="url"/>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Envoyer</button>
+                        <input type="url" class="form-control" name="url" placeholder="Non implémenté" disabled/>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" disabled>Envoyer</button>
                     </div>
                 </form>
             </div> 
         </div>
     </div>
-
 </main>
