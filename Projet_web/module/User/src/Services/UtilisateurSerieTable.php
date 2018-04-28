@@ -167,7 +167,7 @@ class UtilisateurSerieTable {
         return $i;
     }
 
-
+    //Compte le nombre d'épisodes vus pour un utilisateur
     public function countEpisodesById($id){
         //Récupère les objets
         $resultSet=$this->_tableGateway->select(['idUtilisateur' => $id]);

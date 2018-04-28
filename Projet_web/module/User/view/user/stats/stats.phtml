@@ -1,6 +1,7 @@
 <h1 class="titre"> Statistiques</h1>
 
 <hr>
+<!--Infos utilisateur-->
 <div class="row">
 	<img class="avatar" src="<?= $this->user->_picture?>" style="float:left;"/><br>
 	<div class="col-lg-4 col-sm-4" style="padding-left: 35px; padding-top: 50px">
@@ -17,7 +18,7 @@
 <h1>Badges</h1>
 
 
-
+<!--Parcoure tous les badges de l'utilisateur et donne les infos de chaque badge en fonction de son id-->
 <?php foreach($utilisateurBadges as $utilisateurBadge){
     foreach($badges as $badge){
         if($badge->_idBadge==$utilisateurBadge->_idBadge){

@@ -21,6 +21,8 @@ class AdministrationController extends AbstractActionController
         $this->authService = $authService;
         $this->userManager = $userManager;
     }
+
+    //page d'administration
     public function administrationAction()
     {
         //Récupère id de l'utilisateur connecté
@@ -41,12 +43,11 @@ class AdministrationController extends AbstractActionController
 
 
     public function changerMailAction(){
-        //changer le mail
-
 
         //Récupère id de l'utilisateur connecté
         $id=$this->userManager->findByMail($this->authService->getIdentity())->_id;
 
+        //Récupère ancien mail
         $ancienMail=$this->authService->getIdentity();
 
         //Récupère données du formulaire
@@ -65,7 +66,7 @@ class AdministrationController extends AbstractActionController
 
 
     public function changerPhotoAction(){
-
+        //non implémenté
     }
 }
 

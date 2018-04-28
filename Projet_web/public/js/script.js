@@ -36,9 +36,6 @@ function getSeriesRecherche(recherche){
 
                     document.getElementById("search"+3).innerHTML=reponse[2]['show']['title']+"</br><span id='search3Date'>"+reponse[2]['show']['year']+"</span>";
                     document.getElementById("search"+3).setAttribute('href', basepath+'/serie/'+reponse[2]['show']['ids']['slug']);
-
-                    //todo: lien vers série
-
 				}
             }
     };
@@ -48,17 +45,17 @@ function getSeriesRecherche(recherche){
 
 }
 
-
+//Affiche les resultats de recherche
 function displaySearch(){
     document.getElementById("results").classList.remove("hidden");
 }
 
-//todo: Ne marche pas, à vérifier
+//Doit cacher le menu de recherche mais ne fonctionne pas (rend les liens inutilisables)
 function hideSearch(){
     // document.getElementById("results").classList.add("hidden");
 }
 
-
+//Permet d'afficher la note et de gérer le hover
 function note(note){
     star1=document.getElementById("star1");
     star2=document.getElementById("star2");

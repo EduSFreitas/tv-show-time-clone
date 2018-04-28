@@ -26,6 +26,7 @@ class AuthController extends AbstractActionController
         $this->_authManager = $authManager;
     }
 
+    //Page de connexion
     public function loginAction() {
         $redirectUrl = (string)$this->params()->fromQuery('redirectUrl', '');
         if (strlen($redirectUrl)>2048) {
@@ -68,6 +69,7 @@ class AuthController extends AbstractActionController
         ]);
     }
 
+    //déconnexion
     public function logoutAction() {
         $this->_authManager->logout();
 

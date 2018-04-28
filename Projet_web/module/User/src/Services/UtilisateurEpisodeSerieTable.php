@@ -25,7 +25,7 @@ class UtilisateurEpisodeSerieTable {
         return $this->_tableGateway->delete(['idUtilisateur' => $idUser,'idSerie' => $idSerie, 'idSaison'=>$idSaison, 'idEpisode'=>$idEpisode]);
     }
 
-    //
+
     public function select($idUser, $idSerie, $idSaison, $idEpisode){
         return $this->_tableGateway->select(['idUtilisateur' => $idUser,'idSerie' => $idSerie, 'idSaison'=>$idSaison, 'idEpisode'=>$idEpisode])->current();
     }

@@ -33,9 +33,10 @@ class StatsController extends AbstractActionController
         $this->_badge = $badge;
     }
 
+    //Page statistiques
     public function statsAction()
     {
-
+        //Récupère utilisateur connecté
         $user=$this->userManager->findByMail($this->authService->getIdentity());
 
         //Récupère nb de séries suivies

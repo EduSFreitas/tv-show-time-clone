@@ -1,6 +1,10 @@
+<!--Page principale-->
+
+
 <h1 class="titre" >Votre profil</h1>
 <hr>
 <div class="row">
+<!--    Affiche infos de l'utilisateur-->
 	<img class="avatar" src="<?= $this->user->_picture?>" style="float:left;"/><br>
 	<div class="col-lg-4 col-sm-4" style="padding-left: 35px; padding-top: 60px">
         <div class="row">
@@ -10,6 +14,7 @@
 	</div>
 </div>
 <hr>
+<!--Pour chaque série, affiche ses infos et utilise l'autre api pour afficher l'image et le titre-->
 <h3>Séries en cours</h3>
     <div class="row groupeColomnSerie">
 			<?php for ($i=0;$i<sizeof($seriesEnCours);$i++): ?>
@@ -31,7 +36,7 @@
 			<?php endfor;?>
 	</div>
 	<hr>
-
+<!--Pour chaque série, affiche ses infos et utilise l'autre api pour afficher l'image et le titre-->
 <h3>Séries à démarrer</h3>
     <div class="row groupeColomnSerie">
 			<?php for ($i=0;$i<sizeof($seriesADemarrer);$i++): ?>
@@ -53,7 +58,7 @@
 			<?php endfor;?>
 	</div>
 <hr>
-
+<!--Pour chaque série, affiche ses infos et utilise l'autre api pour afficher l'image et le titre-->
 <h3>Séries favorites</h3>
     <div class="row groupeColomnSerie">
 		<?php for ($i=0;$i<sizeof($seriesFavorites);$i++): ?>
